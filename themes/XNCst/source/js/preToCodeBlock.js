@@ -7,7 +7,31 @@ const CopiedIcon =
 const CopyErrorIcon =
     '<svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
-document.querySelectorAll('pre[need-line-numbers="true"]').forEach((pre) => {
+document.querySelectorAll("pre").forEach((pre) => {
+    const caption = pre.querySelector("div.caption");
+    if (caption) {
+        if (caption.textContent.includes("|")) {
+            const args = caption.textContent.split("|");
+            caption.textContent = args[0].trim() || " ";
+            for (let i = 1; i < args.length; i++) {
+                const arg = args[i].trim();
+                if (!arg) break;
+                console.log(arg);
+                if (arg.includes(":")) {
+                    const attributePair = arg.split(":");
+                    pre.setAttribute(
+                        attributePair[0].trim(),
+                        attributePair[1].trim(),
+                    );
+                } else if (arg.startsWith(".")) {
+                    pre.classList.add(arg.slice(1).trim());
+                }
+            }
+        } else {
+            caption.textContent = caption.textContent.trim() || " ";
+        }
+    }
+
     const codeSection = document.createElement("section");
     codeSection.classList.add("code-section");
     // FRAME > VIEW
@@ -28,17 +52,19 @@ document.querySelectorAll('pre[need-line-numbers="true"]').forEach((pre) => {
     const codeContentCode = document.createElement("code");
     codeContentCode.classList = code.classList;
     codeContentCode.classList.add("code-content-code");
-    const hlLines = pre.getAttribute("highlight-lines");
+    // HIGHTLIGHT LINES
+    let hlLines = pre.getAttribute("highlight-lines");
+    if (hlLines === null) hlLines = "0";
     let hlLineIndexs;
     if (hlLines) {
-        const hlArgs = hlLines.split(" ");
-        if (hlArgs[hlArgs.length - 1 === ""]) hlArgs.pop();
+        const hlArgs = hlLines.split(",");
+        if (hlArgs[hlArgs.length - 1] === "") hlArgs.pop();
         hlLineIndexs = hlArgs.map(Number);
     }
     lines.forEach((line, index) => {
         const span = document.createElement("div");
         span.classList.add("code-content-line");
-        span.innerHTML = line;
+        span.innerHTML = line || " ";
         const num = document.createElement("div");
         num.classList.add("code-numbers-num");
         num.textContent = index + 1;
@@ -61,28 +87,38 @@ document.querySelectorAll('pre[need-line-numbers="true"]').forEach((pre) => {
     codeHeaderLeft.classList.add("code-header-left");
     const codeHeaderRight = document.createElement("div");
     codeHeaderRight.classList.add("code-header-right");
-    // LEFT: FILENAME
-    if (pre.hasAttribute("file-name")) {
-        const fn = pre.getAttribute("file-name");
-        if (fn && fn.trim() !== "") {
-            const codeHL_Filename = document.createElement("div");
-            codeHL_Filename.classList.add("code-header-filename");
-            codeHL_Filename.textContent = fn;
-            codeHeaderLeft.appendChild(codeHL_Filename);
-        }
+
+    const title = pre.querySelector("div.caption");
+    const codeHL_Filename = document.createElement("div");
+    codeHL_Filename.classList.add("code-header-title");
+    if (title && title.textContent.trim() !== "") {
+        codeHL_Filename.textContent = title.textContent;
     }
+    codeHeaderLeft.appendChild(codeHL_Filename);
+    // }
 
     // RIGHT: LANG
     const codeHR_Language = document.createElement("div");
     codeHR_Language.classList.add("code-header-language");
-    const _langClass = Array.from(code.classList).find((x) =>
-        x.startsWith("language-"),
-    );
-    let language = _langClass
-        ? _langClass.replace("language-", "")
-        : "Plain Text";
-    // if (language.toLowerCase() === "csharp") language = "C#";
+    // const _langClass = Array.from(code.classList).find((x) =>
+    //     x.startsWith("language-"),
+    // );
+    // let language = _langClass
+    //     ? _langClass.replace("language-", "")
+    //     : "Plain Text";
+    let language;
+    const l1 = pre.getAttribute("lang");
+    const l2 = pre.getAttribute("language");
+    if (l2) language = l2 !== "txt" ? l2 : "Plain Text";
+    else if (l1) language = l1 !== "txt" ? l1 : "Plain Text";
+    else if (caption && caption.textContent.includes("."))
+        language = caption.textContent.split(".")[1].trim().toUpperCase();
+    else if (code.classList[0] === "highlight" && code.classList[1])
+        language = code.classList[1].toUpperCase();
+    else language = "Plain Text";
     codeHR_Language.textContent = language;
+    // codeHR_Language.classList.add("capitalize");
+    // if (language.toLowerCase() === "csharp") language = "C#";
     // RIGHT: COPY-BTN
     const codeHR_CopyBtn = document.createElement("button");
     codeHR_CopyBtn.classList.add("code-header-copy-btn");

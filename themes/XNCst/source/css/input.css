@@ -25,7 +25,7 @@ html {
 /* CALLOUT */
 /* note tip important warning caution */
 .aside-resize-top .callout {
-    @apply px-4 py-2 lg:py-4;
+    @apply px-4 py-2 lg:py-4 my-2;
     @apply tracking-wide text-base lg:text-lg;
     /* @apply text-textContent-light dark:text-textContent-dark; */
     /* @apply border-y-2 lg:border-y-4; */
@@ -343,6 +343,7 @@ article hr {
     @apply border-2 border-border-light dark:border-border-dark;
     @apply rounded-md lg:rounded-xl;
     @apply bg-bg0-light dark:bg-code text-textContent-light dark:text-textContent-dark;
+    @apply mt-2 mb-4;
     /* @apply text-sm; */
 }
 .code-header {
@@ -354,11 +355,11 @@ article hr {
 .code-header-right {
     @apply flex flex-row gap-4;
 }
-.code-header-filename {
+.code-header-title {
     @apply font-semibold;
 }
 .code-header-language {
-    @apply capitalize select-none;
+    @apply select-none;
 }
 .code-header-copy-btn {
     @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
