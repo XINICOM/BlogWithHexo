@@ -1,20 +1,34 @@
 const CONFIG = {
-    tags: ["h1", "h2", "h3"],
+    levels: 3,
     tocContainer_Class: "toc",
     content_Attribute: "tocSource",
     safety_scroll_offset: 1,
 };
 
-let baseIndent = 10;
-CONFIG.tags.forEach((x) => {
-    const tagIndent = parseInt(x.substring(1), 10);
-    if (tagIndent < baseIndent) baseIndent = tagIndent;
-});
+// let baseIndent = 10;
+// CONFIG.tags.forEach((x) => {
+//     console.log(x);
+//     const tagIndent = parseInt(x.substring(1), 10);
+//     if (tagIndent < baseIndent) baseIndent = tagIndent;
+// });
 
 const containers = document.querySelectorAll(`.${CONFIG.tocContainer_Class}`);
 const content = document.querySelector(`article[${CONFIG.content_Attribute}]`);
 if (containers.length > 0 && content) {
-    const headers = content.querySelectorAll(CONFIG.tags.join(","));
+    //
+    const allHeaders = content.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    let baseIndent = 6;
+    allHeaders.forEach((ah) => {
+        const ahi = parseInt(ah.tagName.substring(1), 10);
+        if (ahi < baseIndent) baseIndent = ahi;
+    });
+    let targetTags = [`h${baseIndent}`];
+    for (let i = 1; i < CONFIG.levels; i++)
+        targetTags.push(`h${baseIndent + i}`);
+    console.log(targetTags);
+    const headers = content.querySelectorAll(targetTags.join(","));
+    //
+    // const headers = content.querySelectorAll(CONFIG.tags.join(","));
     if (headers) {
         let tocHTML = "";
         headers.forEach((h, index) => {
@@ -28,6 +42,7 @@ if (containers.length > 0 && content) {
                 if (!id) id = `section-${index}`;
                 h.id = id;
             }
+            // console.log(baseIndent);
             const indent = parseInt(h.tagName.substring(1), 10) - baseIndent;
             tocHTML += `<a href="#${id}" class="toc-item level-${indent}" style="padding-left: ${indent * 1.2}rem">${h.textContent.trim()}</a>`;
         });

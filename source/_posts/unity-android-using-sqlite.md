@@ -2,12 +2,14 @@
 title: Unity 在安卓平台使用 SQLite
 date: 2026-07-24 17:31:38
 tags:
+    - Android
+    - Unity
+    - CSharp
+    - SQLite
+    - 数据库
 header_callout:
     - level: "note"
       title: "本文在此处不是首发"
-      details: '<p>由于该平台的建设时间较晚，故而此处发表的文章中分享的技术，不保证在此处的发布日期时仍然有效。</p><p>原文 <a class="color-text-btn" href="https:/blog.csdn.net/weixin_74545283/article/details/132020069?spm=1011.2124.3001.6209" target="_blank">Unity 在安卓平台使用 SQLite</a> 由本人于 2025年2月1日 发布在 CSDN 平台。</p>'
-    - level: "warning"
-      title: "本文所分享的技术可能已过时"
       details: '<p>由于该平台的建设时间较晚，故而此处发表的文章中分享的技术，不保证在此处的发布日期时仍然有效。</p><p>原文 <a class="color-text-btn" href="https:/blog.csdn.net/weixin_74545283/article/details/132020069?spm=1011.2124.3001.6209" target="_blank">Unity 在安卓平台使用 SQLite</a> 由本人于 2025年2月1日 发布在 CSDN 平台。</p>'
 ---
 

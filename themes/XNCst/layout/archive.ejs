@@ -1,0 +1,64 @@
+<!-- TITLE -->
+<!-- <div class="aside-resize-top color-text-content"></div> -->
+<% 
+// 1. 获取所有已发布的文章，按日期降序排列（最新在前）
+var posts = site.posts.sort('date', -1); 
+
+// 2. 按年份分组
+var yearGroups = {};
+posts.each(function(post) {
+    var year = post.date.year(); // 获取文章年份
+    if (!yearGroups[year]) {
+        yearGroups[year] = [];
+    }
+    yearGroups[year].push(post);
+});
+
+// 3. 获取所有年份并降序排列（最新的年份在前）
+var years = Object.keys(yearGroups).sort(function(a, b) {
+    return b - a;
+});
+%>
+<div class="content-body">
+    <!-- CONTENT -->
+    <main class="color-text-content mt-16 lg:mt-20">
+        <div class="column-info w-full px-4 lg:px-8 py-8 tracking-wide">
+            <div class="text-2xl lg:text-4xl font-semibold pb-2">归档</div>
+            <div class="text-lg lg:text-xl">
+                <p>
+                    这是归档页面，本站现存
+                    <%= site.posts.length %>
+                    篇文章。
+                </p>
+                <p>希望您在这里可以找到感兴趣的文章。</p>
+            </div>
+        </div>
+        <% years.forEach(function(year) { %>
+        <section
+            class="w-full px-4 lg:px-8 py-8 grid grid-cols-[max-content_1fr] gap-4 lg:gap-8"
+        >
+            <div
+                class="text-2xl lg:text-4xl font-semibold font-sans sticky top-24 lg:top-28 h-fit"
+            >
+                <%= year %>
+            </div>
+            <div class="archive-cards">
+                <% yearGroups[year].forEach(function(post) { %>
+                <a class="archive-card-item" href="<%= url_for(post.path) %>">
+                    <div class="text-2xl lg:text-4xl font-bold pb-1">
+                        <%= post.title %>
+                    </div>
+                    <div class="text-sm lg:text-base">
+                        <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+                            <%= date(post.date, 'YYYY年MM月DD日') %> 星期<%=
+                            ['日','一','二','三','四','五','六'][moment(post.date).day()]
+                            %>
+                        </time>
+                    </div>
+                </a>
+                <% }) %>
+            </div>
+        </section>
+        <% }) %>
+    </main>
+</div>
