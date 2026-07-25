@@ -1608,8 +1608,6 @@ article .callout .callout-title {
 .archive-cards .archive-card-item {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 @media (min-width: 1024px) {

@@ -264,7 +264,7 @@ article .callout .callout-title {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 .archive-cards .archive-card-item {
-    @apply py-6 lg:py-8 px-4;
+    @apply py-6 lg:py-8;
     @apply flex flex-col gap-2;
     /* @apply  grid grid-cols-[max-content_1fr]; */
 }

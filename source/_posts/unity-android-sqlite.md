@@ -11,7 +11,7 @@ categories:
     - 编程
     - 游戏开发
 column:
-    title: "Unity-dev-experience"
+    title: "Unity 开发经验"
     order: 1
 header_callout:
     - level: "note"
@@ -58,13 +58,13 @@ header_callout:
 最后你的项目下面应该有这些：
 <!-- ![项目资源树](/1/77429f4dc76e82171c3b4736afe41ba2.png) -->
 
-{% asset_img p2.png 项目资源树 %}
+{% asset_img p2.png '项目资源树' %}
 
 ## 创建脚本
 
 新建 C# 脚本复制下面代码：
 
-```cs DataBase.cs|highlight-lines:1,2,3|lang:txt
+```cs DataBase.cs | highlight-lines:1,2,3 | lang:txt
 public class DataBaseManager
 {
     /// <summary>
