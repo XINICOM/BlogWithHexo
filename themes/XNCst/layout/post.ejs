@@ -58,19 +58,32 @@
                 ati.insertAdjacentHTML("afterbegin", tagIcon),
             );
         </script>
+        <% if (page.categories && page.categories.length) { %>
         <div class="article-categories">
             <div class="px-2 border-r-2 color-border text-right">分类</div>
             <div class="article-categories-content">
-                <a class="color-text-btn" href="#">编程</a> >
-                <a class="color-text-btn" href="#">游戏开发</a>
+                <% var cates = []; page.categories.each(function(c) {
+                cates.push(`<a class="color-text-btn" href="${url_for(c.path)}"
+                    >${c.name}</a
+                >`); }); %> <%- cates.join(' > ') %>
+                <!-- <a class="color-text-btn" href="#">编程</a> >
+                <a class="color-text-btn" href="#">游戏开发</a> -->
             </div>
         </div>
+        <% } %>
+        <% if (page.column && page.column.title) { %>
         <div class="article-columns">
             <div class="px-2 border-r-2 color-border text-right">专栏</div>
             <div class="px-2">
-                <a class="color-text-btn" href="">Unity 开发经验</a>
+                <a
+                    class="color-text-btn"
+                    href="<%=url_for('/columns/' + page.column.title + '/')%>"
+                >
+                    <%= page.column.title%>
+                </a>
             </div>
         </div>
+        <% } %>
         <div class="article-publish_time">
             <div class="px-2 border-r-2 color-border text-right">发布日期</div>
             <div class="px-2">

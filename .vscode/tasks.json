@@ -12,7 +12,7 @@
             }
         },
         {
-            "label": "HEXO Test Server (hexo s)",
+            "label": "Hexo-Server",
             "type": "shell",
             "command": "hexo s",
             "group": "build",
@@ -20,6 +20,23 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             }
+        },
+        {
+            "label": "Hexo-Clean",
+            "type": "shell",
+            "command": "hexo clean",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "HEXO Test",
+            "dependsOn": ["Hexo-Clean", "Hexo-Server"],
+            "dependsOrder": "sequence", // 或 "parallel"
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

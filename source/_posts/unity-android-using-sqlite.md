@@ -7,6 +7,12 @@ tags:
     - CSharp
     - SQLite
     - 数据库
+categories:
+    - 编程
+    - 游戏开发
+column:
+    title: "Unity-dev-experience"
+    order: 1
 header_callout:
     - level: "note"
       title: "本文在此处不是首发"

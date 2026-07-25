@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: "XINCOM's Blog"
 subtitle: ""
 description: ""
 keywords:
-author: John Doe
-language: en
-timezone: ""
+author: "XINICOM (YiCheng ZHOU)"
+language: zh-CN
+timezone: "Asia/Shanghai"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
-permalink: :year/:month/:day/:title/
+url: https://XINICOM.github.io/blog/
+permalink: articles/:year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
     trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -73,6 +73,8 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+    "编程": "coding"
+    "游戏开发": "game_dev"
 tag_map:
     - "数据库": "data_base"
 
