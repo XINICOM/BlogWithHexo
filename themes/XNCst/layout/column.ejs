@@ -4,7 +4,7 @@
         <div class="column-info w-full px-4 lg:px-8 py-8 tracking-wide">
             <div class="text-2xl lg:text-4xl font-semibold pb-2">
                 <!-- Unity 开发经验 -->
-                <%= page.column.title %>
+                <%= page.column.title %>（<%= page.articles.length %>）
             </div>
             <% if(page.column.details) { %>
             <div class="text-lg lg:text-xl">
@@ -35,6 +35,15 @@
                                 <%= date(page.articles[i].date, 'YYYY年MM月DD日') %>
                                 星期<%=
                             ['日','一','二','三','四','五','六'][moment(page.articles[i].date).day()]
+                            %>
+                            </time>
+                            -
+                            <time
+                                datetime="<%= date(page.articles[i].date, 'YYYY-MM-DD') %>"
+                            >
+                                <%= date(page.articles[i].updated||page.articles[i].date, 'YYYY年MM月DD日') %>
+                                星期<%=
+                            ['日','一','二','三','四','五','六'][moment(page.articles[i].updated||page.articles[i].date).day()]
                             %>
                             </time>
                         </div>

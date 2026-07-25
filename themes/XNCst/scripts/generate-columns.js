@@ -32,7 +32,7 @@ hexo.extend.filter.register("before_post_render", function (data) {
         .sort((a, b) => sortArticlesUnderColumn(a, b));
     // data.column.allPosts = sameColumnPosts;
     const currentIndex = sameColumnPosts.findIndex((p) => p.path === data.path);
-    console.log(URL_Slug, currentIndex);
+    // console.log(URL_Slug, currentIndex);
     data.column.currentPostIndex = currentIndex;
     const prevPost =
         currentIndex > 0 ? sameColumnPosts[currentIndex - 1] : null;
@@ -66,56 +66,58 @@ hexo.extend.generator.register("columns", function (locals) {
             columnGroups[columnTitle].push(p);
         }
     });
-
-    // 2. 为每个专栏生成一个页面
+    //
     var results = [];
     var columnTitles = Object.keys(columnGroups);
 
+    var allColumns = [];
     columnTitles.forEach((originTitle) => {
-        // 生成 URL 友好的 slug（将空格、特殊字符转为连字符）
-        // console.log("🟢" + slugize(columnName));
-        // const Title_slug = slugize(originTitle);
-        // const Title_map_slug = columnTitleMapping[originTitle];
-        // const URL_slug = Title_map_slug === "" ? Title_slug : Title_map_slug;
         const URL_slug = getColumnURLSlug(originTitle);
-
-        // 获取该专栏下的所有文章，按 column.order 排序
-        // var articles = columnGroups[originTitle].sort(function (a, b) {
-        //     // 如果有 column.order 字段，按它排序
-        //     if (a.column.order && b.column.order) {
-        //         return a.column.order - b.column.order;
-        //     }
-        //     // 否则按日期降序
-        //     return b.date - a.date;
-        // });
         var articles = columnGroups[originTitle].sort((a, b) =>
             sortArticlesUnderColumn(a, b),
         );
-
-        // 创建页面数据
+        //
+        const path = "columns/" + URL_slug + "/index.html";
         results.push({
-            path: "columns/" + URL_slug + "/index.html", // 路径：columns/专栏名/
+            path: path,
             data: {
-                // title: originTitle + " - 专栏",
-                // column: originTitle,
                 column: {
                     title: originTitle,
                     slug: URL_slug,
                 },
                 articles: articles,
-                // total: articles.length,
                 layout: ["column", "index"],
             },
             layout: ["column", "index"],
         });
-    });
+        // articles.forEach((a) => console.log(">>>", originTitle, a.title));
 
-    // 3. 生成专栏汇总页（可选）
+        //
+        const latestPost = [...columnGroups[originTitle]].sort(
+            (a, b) => b.updated - a.updated,
+        )[0];
+        allColumns.push({
+            path: path,
+            title: originTitle,
+            slug: URL_slug,
+            postsCount: articles.length,
+            updateTime: latestPost
+                ? latestPost.updated || latestPost.date
+                : null,
+        });
+        // articles.forEach((a) => console.log("/>>", originTitle, a.title));
+        // console.log(
+        //     latestPost.title,
+        //     latestPost ? latestPost.updated || latestPost.date : null,
+        // );
+    });
+    //
+    allColumns.sort((a, b) => b.updateTime - a.updateTime);
     results.push({
         path: "columns/index.html",
         data: {
-            columns: columnGroups,
-            columnNames: Object.keys(columnGroups),
+            columns: allColumns,
+            // columnNames: Object.keys(columnGroups),
             layout: ["column-home", "index"],
         },
         layout: ["column-home", "index"],
@@ -128,20 +130,40 @@ function getColumnURLSlug(originTitle) {
     const columnTitleMapping = hexo.config.column_map || {};
     const Title_slug = slugize(originTitle);
     const Title_map_slug = columnTitleMapping[originTitle];
-    // console.log(originTitle, Title_map_slug);
-    // return Title_map_slug &&
-    //     Title_map_slug !== "" &&
-    //     Title_map_slug !== undefined
-    //     ? Title_map_slug
-    //     : Title_slug;
     return Title_map_slug || Title_slug;
 }
 
 function sortArticlesUnderColumn(a, b) {
-    // 如果有 column.order 字段，按它排序
-    if (a.column.order && b.column.order) {
-        return a.column.order - b.column.order;
+    // if (a.column.order && b.column.order)
+    //     return a.column.order - b.column.order;
+    // if (a.column.order !== undefined) {
+    //     return -1;
+    // }
+    // if (b.column.order !== undefined) {
+    //     return 1;
+    // }
+    // const timeA = a.updated
+    //     ? new Date(a.updated).getTime()
+    //     : new Date(a.date).getTime();
+    // const timeB = b.updated
+    //     ? new Date(b.updated).getTime()
+    //     : new Date(b.date).getTime();
+    // return timeA - timeB;
+    // 获取 order 值，没有则设为 Infinity（排在最后）
+    const orderA = a.column.order !== undefined ? a.column.order : Infinity;
+    const orderB = b.column.order !== undefined ? b.column.order : Infinity;
+
+    // 如果 order 不同，按 order 升序
+    if (orderA !== orderB) {
+        return orderA - orderB;
     }
-    // 否则按日期降序
-    return b.date - a.date;
+
+    // order 相同或都没有 order，按日期升序（旧 → 新）
+    const timeA = a.updated
+        ? new Date(a.updated).getTime()
+        : new Date(a.date).getTime();
+    const timeB = b.updated
+        ? new Date(b.updated).getTime()
+        : new Date(b.date).getTime();
+    return timeA - timeB;
 }
