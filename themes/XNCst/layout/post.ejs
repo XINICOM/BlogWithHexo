@@ -76,7 +76,7 @@
             <div class="px-2 border-r-2 color-border text-right">专栏</div>
             <div class="px-2">
                 <a class="color-text-btn" href="<%=url_for(page.column.path)%>">
-                    <%= page.column.title%>
+                    <%= page.column.title %>
                 </a>
             </div>
         </div>
@@ -131,15 +131,53 @@
         </article>
         <script src="<%- url_for('/js/preToCodeBlock.js') %>"></script>
         <script src="<%- url_for('/js/tocGenterator.js') %>"></script>
+        <% if (page.column && page.column.title) { %>
         <div class="column-link px-8 py-8 border-t color-border">
             <div class="text-lg lg:text-xl font-semibold pb-2 lg:pb-4">
-                本文属于
-                <a class="color-text-btn" href="">Unity 开发经验</a>
-                专栏
+                本文属于 <% if ( page.column.prevColumnPost &&
+                page.column.nextColumnPost) { %>
+                <a class="color-text-btn" href="<%=url_for(page.column.path)%>">
+                    <%= page.column.title %>
+                </a>
+                <% } else { %>
+                <%= page.column.title %>
+                <% } %>
+                专栏中的第
+                <%= page.column.currentPostIndex + 1 %>
+                篇
             </div>
             <div class="grid grid-cols-2 gap-2 lg:gap-8">
+                <% if ( page.column.prevColumnPost ) { %>
                 <a
-                    href=""
+                    href="<%=url_for(page.column.prevColumnPost.path)%>"
+                    class="text-left color-text-btn border-2 rounded-md color-border"
+                >
+                    <div
+                        class="grid grid-cols-[max-content_1fr] gap-2 lg:gap-4 py-1 pl-1"
+                    >
+                        <svg
+                            class="w-6 h-6 lg:w-7 lg:h-7"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        <div class="grid grid-rows-[auto_auto] gap-1 lg:gap-2">
+                            <div class="text-base lg:text-lg">上一篇文章</div>
+                            <div class="text-sm lg:text-base">
+                                <%= page.column.prevColumnPost.title %>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% } else { %>
+                <a
+                    href="<%=url_for(page.column.path)%>"
                     class="text-left color-text-btn border-2 rounded-md color-border"
                 >
                     <div
@@ -158,25 +196,54 @@
                             <path d="M19 12H5M12 19l-7-7 7-7"></path>
                         </svg>
                         <div class="grid grid-rows-[auto_auto] gap-1 lg:gap-2">
-                            <div class="text-base lg:text-lg">
-                                返回专栏标题页
+                            <div class="text-base lg:text-lg">专栏标题页</div>
+                            <div class="text-sm lg:text-base">
+                                <%= page.column.title %>
                             </div>
                         </div>
                     </div>
                 </a>
+                <% } %>
+                <% if ( page.column.nextColumnPost ) { %>
                 <a
-                    href=""
+                    href="<%=url_for(page.column.nextColumnPost.path)%>"
                     class="text-right color-text-btn border-2 rounded-md color-border"
                 >
                     <div
                         class="grid grid-cols-[1fr_max-content] gap-2 lg:gap-4 py-1 pr-1"
                     >
                         <div class="grid grid-rows-[auto_auto] gap-1 lg:gap-2">
-                            <div class="text-base lg:text-lg">
-                                阅读下一篇文章
-                            </div>
+                            <div class="text-base lg:text-lg">下一篇文章</div>
                             <div class="text-sm lg:text-base">
-                                Unity 正方体贴图
+                                <%= page.column.nextColumnPost.title %>
+                            </div>
+                        </div>
+                        <svg
+                            class="w-6 h-6 lg:w-7 lg:h-7"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+                </a>
+                <% } else { %>
+                <a
+                    href="<%=url_for(page.column.path)%>"
+                    class="text-right color-text-btn border-2 rounded-md color-border"
+                >
+                    <div
+                        class="grid grid-cols-[1fr_max-content] gap-2 lg:gap-4 py-1 pr-1"
+                    >
+                        <div class="grid grid-rows-[auto_auto] gap-1 lg:gap-2">
+                            <div class="text-base lg:text-lg">专栏标题页</div>
+                            <div class="text-sm lg:text-base">
+                                <%= page.column.title %>
                             </div>
                         </div>
                         <svg
@@ -194,13 +261,10 @@
                         </svg>
                     </div>
                 </a>
-                <!-- 阅读上一篇文章 -->
-                <!-- <a href="" class="text-right">
-                            <div>阅读下一篇文章</div>
-                        </a> -->
-                <!-- 返回专栏标题页 -->
+                <% } %>
             </div>
         </div>
+        <% } %>
     </main>
     <!-- RIGHT ASIDE -->
     <div class="hidden 2xl:block border-l color-border">

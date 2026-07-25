@@ -44,7 +44,10 @@ var years = Object.keys(yearGroups).sort(function(a, b) {
             </div>
             <div class="archive-cards">
                 <% yearGroups[year].forEach(function(post) { %>
-                <a class="archive-card-item" href="<%= url_for(post.path) %>">
+                <a
+                    class="archive-card-item flex flex-col gap-2"
+                    href="<%= url_for(post.path) %>"
+                >
                     <div class="text-2xl lg:text-4xl font-bold pb-1">
                         <%= post.title %>
                     </div>

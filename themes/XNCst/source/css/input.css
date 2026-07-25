@@ -265,7 +265,7 @@ article .callout .callout-title {
 }
 .archive-cards .archive-card-item {
     @apply py-6 lg:py-8;
-    @apply flex flex-col gap-2;
+    /* @apply flex flex-col gap-2; */
     /* @apply  grid grid-cols-[max-content_1fr]; */
 }
 .archive-cards .archive-card-item:first-child {

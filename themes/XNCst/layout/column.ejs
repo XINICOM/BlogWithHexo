@@ -12,36 +12,36 @@
             </div>
             <% } %>
         </div>
-        <% for (let i = 0; i < page.articles.length; i++) { %>
-        <section
-            class="w-full px-4 lg:px-8 py-8 grid grid-cols-[max-content_1fr] gap-4 lg:gap-8"
-        >
-            <div
-                class="text-2xl lg:text-4xl font-semibold font-sans top-24 lg:top-28 h-fit"
-            >
-                <%= i + 1 %>.
-            </div>
+        <section class="w-full px-4 lg:px-8 py-8">
             <div class="archive-cards">
+                <% for (let i = 0; i < page.articles.length; i++) { %>
                 <a
-                    class="archive-card-item"
+                    class="archive-card-item grid grid-cols-[max-content_1fr] gap-4"
                     href="<%= url_for(page.articles[i].path) %>"
                 >
-                    <div class="text-2xl lg:text-4xl font-bold pb-1">
-                        <%= page.articles[i].title %>
+                    <div
+                        class="text-2xl lg:text-4xl font-semibold font-sans top-24 lg:top-28 h-fit"
+                    >
+                        <%= i + 1 %>.
                     </div>
-                    <div class="text-sm lg:text-base">
-                        <time
-                            datetime="<%= date(page.articles[i].date, 'YYYY-MM-DD') %>"
-                        >
-                            <%= date(page.articles[i].date, 'YYYY年MM月DD日') %>
-                            星期<%=
+                    <div>
+                        <div class="text-2xl lg:text-4xl font-bold pb-1">
+                            <%= page.articles[i].title %>
+                        </div>
+                        <div class="text-sm lg:text-base">
+                            <time
+                                datetime="<%= date(page.articles[i].date, 'YYYY-MM-DD') %>"
+                            >
+                                <%= date(page.articles[i].date, 'YYYY年MM月DD日') %>
+                                星期<%=
                             ['日','一','二','三','四','五','六'][moment(page.articles[i].date).day()]
                             %>
-                        </time>
+                            </time>
+                        </div>
                     </div>
                 </a>
+                <% } %>
             </div>
         </section>
-        <% } %>
     </main>
 </div>
