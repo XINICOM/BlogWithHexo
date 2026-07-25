@@ -1,6 +1,8 @@
 "use strict";
 // const { url_for } = require("hexo-util");
 const { slugize } = require("hexo-util");
+const fs = require("fs");
+const path = require("path");
 
 hexo.extend.filter.register("before_post_render", function (data) {
     // 1. 从文章 Front-matter 中读取 column 配置
@@ -73,6 +75,7 @@ hexo.extend.generator.register("columns", function (locals) {
     var allColumns = [];
     columnTitles.forEach((originTitle) => {
         const URL_slug = getColumnURLSlug(originTitle);
+        const introContent = getColumnIntro(URL_slug + ".md");
         var articles = columnGroups[originTitle].sort((a, b) =>
             sortArticlesUnderColumn(a, b),
         );
@@ -84,6 +87,7 @@ hexo.extend.generator.register("columns", function (locals) {
                 column: {
                     title: originTitle,
                     slug: URL_slug,
+                    intro: introContent,
                 },
                 articles: articles,
                 layout: ["column", "index"],
@@ -112,7 +116,7 @@ hexo.extend.generator.register("columns", function (locals) {
         // );
     });
     //
-    allColumns.sort((a, b) => b.updateTime - a.updateTime);
+    allColumns.sort((a, b) => (b.updateTime || 0) - (a.updateTime || 0));
     results.push({
         path: "columns/index.html",
         data: {
@@ -166,4 +170,59 @@ function sortArticlesUnderColumn(a, b) {
         ? new Date(b.updated).getTime()
         : new Date(b.date).getTime();
     return timeA - timeB;
+}
+
+function getColumnIntro(fileName) {
+    const introDir = path.join(
+        hexo.source_dir,
+        hexo.config["introduction_folder"]
+            ? hexo.config["introduction_folder"]["column"] || "_column-intros"
+            : "_column-intros",
+    );
+    const filePath = path.join(introDir, fileName);
+    try {
+        if (fs.existsSync(filePath)) {
+            const content = fs.readFileSync(filePath, "utf8");
+            // 移除 Front-matter（如果存在）
+            const contentWithoutFrontmatter = content.replace(
+                /^---\n[\s\S]*?\n---\n/,
+                "",
+            );
+            const renderedContent = hexo.render.renderSync({
+                text: contentWithoutFrontmatter,
+                engine: "markdown",
+            });
+
+            return renderedContent;
+            // return contentWithoutFrontmatter;
+        } else logWarning(`NO Introduction File named of ${fileName}`);
+    } catch (err) {
+        logError(`NO Introduction File named of ${fileName}`);
+    }
+    return null;
+}
+
+const colors = {
+    // 字体颜色
+    white: "\x1b[37m",
+    black: "\x1b[30m",
+    yellow: "\x1b[33m",
+
+    // 背景颜色
+    bgRed: "\x1b[41m",
+    bgYellow: "\x1b[43m",
+
+    // 样式
+    bold: "\x1b[1m",
+    reset: "\x1b[0m",
+};
+function logError(message) {
+    console.log(
+        `${colors.bgRed}${colors.white} ERROR ${colors.reset} ${colors.white}${message}${colors.reset}`,
+    );
+}
+function logWarning(message) {
+    console.log(
+        `${colors.bgYellow}${colors.black} WARNING ${colors.reset} ${colors.yellow}${message}${colors.reset}`,
+    );
 }

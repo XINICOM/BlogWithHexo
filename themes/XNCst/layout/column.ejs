@@ -6,9 +6,11 @@
                 <!-- Unity 开发经验 -->
                 <%= page.column.title %>（<%= page.articles.length %>）
             </div>
-            <% if(page.column.details) { %>
+            <% if ( page.column.intro ) { %>
+            <div class="text-lg lg:text-xl"><%- page.column.intro %></div>
+            <% } else { %>
             <div class="text-lg lg:text-xl">
-                <p>介绍内容</p>
+                本专栏暂无介绍，希望您可以在这里找到您感兴趣的文章
             </div>
             <% } %>
         </div>
