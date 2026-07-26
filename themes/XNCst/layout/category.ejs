@@ -1,0 +1,17 @@
+<div
+    class="aside-resize-top mt-16 lg:mt-20 border-b color-border color-text-content text-center"
+>
+    <div class="callout caution">
+        <div class="max-w-fit mx-auto">
+            <div class="callout-title">这是 category.ejs</div>
+            <p>
+                鉴于本网站还未完工，一般本页面不应该使用 category.ejs 来生产。
+            </p>
+            <p><%= page.category %></p>
+            <% 
+                console.log(JSON.stringify(page.allCategories));
+                // console.log(site.categories.data[0].slug);
+            %>
+        </div>
+    </div>
+</div>

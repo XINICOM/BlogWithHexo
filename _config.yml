@@ -74,6 +74,9 @@ index_generator:
 tag_generator:
     enable_index_page: true
 
+category_generator:
+    enable_index_page: true
+
 # Category & Tag
 default_category: uncategorized
 category_map:

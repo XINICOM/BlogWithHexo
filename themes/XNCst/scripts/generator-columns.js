@@ -143,6 +143,7 @@ function getColumnURLSlug(originTitle) {
     const Title_map_slug = columnTitleMapping[originTitle];
     return Title_map_slug || Title_slug;
 }
+exports.getColumnURLSlug = getColumnURLSlug;
 
 function sortArticlesUnderColumn(a, b) {
     // if (a.column.order && b.column.order)
@@ -178,6 +179,7 @@ function sortArticlesUnderColumn(a, b) {
         : new Date(b.date).getTime();
     return timeA - timeB;
 }
+exports.sortArticlesUnderColumn = sortArticlesUnderColumn;
 
 function getColumnIntro(fileName) {
     const introDir = path.join(
@@ -206,6 +208,7 @@ function getColumnIntro(fileName) {
     }
     return null;
 }
+exports.getColumnIntro = getColumnIntro;
 
 const colors = {
     white: "\x1b[37m",
