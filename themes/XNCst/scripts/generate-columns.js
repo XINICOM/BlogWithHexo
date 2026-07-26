@@ -182,9 +182,7 @@ function sortArticlesUnderColumn(a, b) {
 function getColumnIntro(fileName) {
     const introDir = path.join(
         hexo.source_dir,
-        hexo.config["introduction_folder"]
-            ? hexo.config["introduction_folder"]["column"] || "_column-intros"
-            : "_column-intros",
+        hexo.config?.introduction_folder?.column || "_column-intros",
     );
     const filePath = path.join(introDir, fileName);
     try {
@@ -202,24 +200,19 @@ function getColumnIntro(fileName) {
 
             return renderedContent;
             // return contentWithoutFrontmatter;
-        } else logWarning(`NO Introduction File named of ${fileName}`);
+        } else logWarning(`NO COLUMN Introduction File named of ${fileName}`);
     } catch (err) {
-        logError(`NO Introduction File named of ${fileName}`);
+        logError(`NO COLUMN Introduction File named of ${fileName}`);
     }
     return null;
 }
 
 const colors = {
-    // 字体颜色
     white: "\x1b[37m",
     black: "\x1b[30m",
     yellow: "\x1b[33m",
-
-    // 背景颜色
     bgRed: "\x1b[41m",
     bgYellow: "\x1b[43m",
-
-    // 样式
     bold: "\x1b[1m",
     reset: "\x1b[0m",
 };

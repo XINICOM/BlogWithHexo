@@ -71,7 +71,6 @@ index_generator:
     order_by: -date
     layout: "home"
 
-# _config.yml
 tag_generator:
     enable_index_page: true
 

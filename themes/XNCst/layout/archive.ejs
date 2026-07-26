@@ -1,10 +1,5 @@
-<!-- TITLE -->
-<!-- <div class="aside-resize-top color-text-content"></div> -->
 <% 
-// 1. 获取所有已发布的文章，按日期降序排列（最新在前）
 var posts = site.posts.sort('updated', -1); 
-
-// 2. 按年份分组
 var yearGroups = {};
 posts.each(function(post) {
     var year = (post.updated||post.date).year();
@@ -13,8 +8,6 @@ posts.each(function(post) {
     }
     yearGroups[year].push(post);
 });
-
-// 3. 获取所有年份并降序排列（最新的年份在前）
 var years = Object.keys(yearGroups).sort(function(a, b) {
     return b - a;
 });
