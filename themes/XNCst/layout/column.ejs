@@ -1,18 +1,19 @@
 <div class="content-body">
-    <!-- CONTENT -->
     <main class="color-text-content mt-16 lg:mt-20">
-        <div class="column-info w-full px-4 lg:px-8 py-8 tracking-wide">
+        <div class="w-full px-4 lg:px-8 py-8 tracking-wide">
             <div class="text-2xl lg:text-4xl font-semibold pb-2">
-                <!-- Unity 开发经验 -->
-                <%= page.column.title %>（<%= page.articles.length %>）
+                <%= page.column.title %>（专栏）
             </div>
-            <% if ( page.column.intro ) { %>
-            <div class="text-lg lg:text-xl"><%- page.column.intro %></div>
-            <% } else { %>
             <div class="text-lg lg:text-xl">
-                本专栏暂无介绍，希望您可以在这里找到您感兴趣的文章
+                <% if ( page.column.intro ) { %>
+                <p><%- page.column.intro %></p>
+                <% } else { %>
+                <p>本专栏暂无介绍……</p>
+                <% } %>
             </div>
-            <% } %>
+            <div class="text-sm lg:text-base pt-2">
+                共有 <%= page.articles.length %> 篇文章。
+            </div>
         </div>
         <section class="w-full px-4 lg:px-8 py-8">
             <div class="archive-cards">
@@ -30,24 +31,26 @@
                         <div class="text-2xl lg:text-4xl font-bold pb-1">
                             <%= page.articles[i].title %>
                         </div>
-                        <div class="text-sm lg:text-base">
+                        <div class="text-sm lg:text-base font-mono">
+                            <% if ( page.articles[i].updated ) { %>
+                            <time
+                                datetime="<%= date(page.articles[i].updated || page.articles[i].date, 'YYYY-MM-DD') %>"
+                            >
+                                <%= date(page.articles[i].updated || page.articles[i].date, 'YY.MM.DD') %>
+                                <%=
+                            ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'][moment(page.articles[i].updated
+                            || page.articles[i].date).day()] %>
+                            </time>
+                            <% } else { %>
                             <time
                                 datetime="<%= date(page.articles[i].date, 'YYYY-MM-DD') %>"
                             >
-                                <%= date(page.articles[i].date, 'YYYY年MM月DD日') %>
-                                星期<%=
-                            ['日','一','二','三','四','五','六'][moment(page.articles[i].date).day()]
-                            %>
+                                <%= date(page.articles[i].date, 'YY.MM.DD') %>
+                                <%=
+                                ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'][moment(page.articles[i].date).day()]
+                                %>
                             </time>
-                            -
-                            <time
-                                datetime="<%= date(page.articles[i].date, 'YYYY-MM-DD') %>"
-                            >
-                                <%= date(page.articles[i].updated||page.articles[i].date, 'YYYY年MM月DD日') %>
-                                星期<%=
-                            ['日','一','二','三','四','五','六'][moment(page.articles[i].updated||page.articles[i].date).day()]
-                            %>
-                            </time>
+                            <% } %>
                         </div>
                     </div>
                 </a>

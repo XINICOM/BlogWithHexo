@@ -2,12 +2,12 @@
 <!-- <div class="aside-resize-top color-text-content"></div> -->
 <% 
 // 1. 获取所有已发布的文章，按日期降序排列（最新在前）
-var posts = site.posts.sort('date', -1); 
+var posts = site.posts.sort('updated', -1); 
 
 // 2. 按年份分组
 var yearGroups = {};
 posts.each(function(post) {
-    var year = post.date.year(); // 获取文章年份
+    var year = (post.updated||post.date).year();
     if (!yearGroups[year]) {
         yearGroups[year] = [];
     }
@@ -24,13 +24,14 @@ var years = Object.keys(yearGroups).sort(function(a, b) {
     <main class="color-text-content mt-16 lg:mt-20">
         <div class="column-info w-full px-4 lg:px-8 py-8 tracking-wide">
             <div class="text-2xl lg:text-4xl font-semibold pb-2">归档</div>
-            <div class="text-lg lg:text-xl">
+            <!-- <div class="text-lg lg:text-xl">
                 <p>
-                    这是归档页面，本站现存
-                    <%= site.posts.length %>
-                    篇文章。
+                    本站现存
+                    篇文章，希望您在这里可以找到感兴趣的内容。
                 </p>
-                <p>希望您在这里可以找到感兴趣的文章。</p>
+            </div> -->
+            <div class="text-sm lg:text-base pt-2">
+                共有 <%= site.posts.length %> 篇文章。
             </div>
         </div>
         <% years.forEach(function(year) { %>
@@ -51,12 +52,23 @@ var years = Object.keys(yearGroups).sort(function(a, b) {
                     <div class="text-2xl lg:text-4xl font-bold pb-1">
                         <%= post.title %>
                     </div>
-                    <div class="text-sm lg:text-base">
+                    <div class="text-sm lg:text-base font-mono">
+                        <% if ( post.updated ) { %>
+                        <time
+                            datetime="<%= date(post.updated || post.date, 'YYYY-MM-DD') %>"
+                        >
+                            <%= date(post.updated || post.date, 'YY.MM.DD') %>
+                            <%=
+                            ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'][moment(post.updated
+                            || post.date).day()] %>
+                        </time>
+                        <% } else { %>
                         <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
-                            <%= date(post.date, 'YYYY年MM月DD日') %> 星期<%=
-                            ['日','一','二','三','四','五','六'][moment(post.date).day()]
+                            <%= date(post.date, 'YY.MM.DD') %> <%=
+                            ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'][moment(post.date).day()]
                             %>
                         </time>
+                        <% } %>
                     </div>
                 </a>
                 <% }) %>

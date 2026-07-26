@@ -327,6 +327,7 @@ article hr {
 }
 
 /* TOC BTN */
+/* 虽然叫做 toc-item 但是其实所有侧边栏和顶栏的按钮都是这个类 */
 .toc-item {
     @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
     @apply capitalize;

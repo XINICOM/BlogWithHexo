@@ -49,6 +49,14 @@ hexo.extend.filter.register("before_post_render", function (data) {
         ? { title: nextPost.title, path: nextPost.path }
         : null;
 
+    data.column.allPosts = [];
+    sameColumnPosts.forEach((p) => {
+        data.column.allPosts.push({
+            title: p.title,
+            path: p.path,
+        });
+    });
+
     return data;
 });
 
@@ -94,20 +102,19 @@ hexo.extend.generator.register("columns", function (locals) {
             },
             layout: ["column", "index"],
         });
-        // articles.forEach((a) => console.log(">>>", originTitle, a.title));
 
-        //
         const latestPost = [...columnGroups[originTitle]].sort(
-            (a, b) => b.updated - a.updated,
+            (a, b) => (b.updated || b.date) - (a.updated || a.data),
         )[0];
         allColumns.push({
             path: path,
             title: originTitle,
             slug: URL_slug,
             postsCount: articles.length,
-            updateTime: latestPost
+            updatedTime: latestPost
                 ? latestPost.updated || latestPost.date
                 : null,
+            intro: introContent,
         });
         // articles.forEach((a) => console.log("/>>", originTitle, a.title));
         // console.log(
@@ -116,15 +123,15 @@ hexo.extend.generator.register("columns", function (locals) {
         // );
     });
     //
-    allColumns.sort((a, b) => (b.updateTime || 0) - (a.updateTime || 0));
+    allColumns.sort((a, b) => (b.updatedTime || 0) - (a.updatedTime || 0));
     results.push({
         path: "columns/index.html",
         data: {
             columns: allColumns,
             // columnNames: Object.keys(columnGroups),
-            layout: ["column-home", "index"],
+            layout: ["column-index", "index"],
         },
-        layout: ["column-home", "index"],
+        layout: ["column-index", "index"],
     });
 
     return results;

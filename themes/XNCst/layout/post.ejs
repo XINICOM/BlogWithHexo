@@ -82,7 +82,7 @@
         </div>
         <% } %>
         <div class="article-publish_time">
-            <div class="px-2 border-r-2 color-border text-right">发布日期</div>
+            <div class="px-2 border-r-2 color-border text-right">创建日期</div>
             <div class="px-2">
                 <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>">
                     <%= date(page.date, 'YYYY年MM月DD日') %> 星期<%=
@@ -109,7 +109,7 @@
                     class="overflow-y-scroll grow"
                     style="overscroll-behavior: contain"
                 >
-                    <div class="pb-2 px-4 hidden lg:block">
+                    <div class="pb-2 px-4">
                         <div
                             class="uppercase tracking-wider text-center pt-4 pb-2 sticky top-0 border-b color-border color-text-primary color-layer-0 font-semibold"
                         >
@@ -129,14 +129,15 @@
             <!-- 直接包含生成器的生成内容，具体的结构由前端 JS 渲染 -->
             <%- page.content %>
         </article>
-        <script src="<%- url_for('/js/preToCodeBlock.js') %>"></script>
-        <script src="<%- url_for('/js/tocGenterator.js') %>"></script>
         <% if (page.column && page.column.title) { %>
         <div class="column-link px-8 py-8 border-t color-border">
             <div class="text-lg lg:text-xl font-semibold pb-2 lg:pb-4">
                 本文属于 <% if ( page.column.prevColumnPost &&
                 page.column.nextColumnPost) { %>
-                <a class="color-text-btn" href="<%=url_for(page.column.path)%>">
+                <a
+                    class="color-text-btn"
+                    href="<%= url_for(page.column.path) %>"
+                >
                     <%= page.column.title %>
                 </a>
                 <% } else { %>
@@ -266,6 +267,8 @@
         </div>
         <% } %>
     </main>
+    <script src="<%- url_for('/js/preToCodeBlock.js') %>"></script>
+    <script src="<%- url_for('/js/tocGenterator.js') %>"></script>
     <!-- RIGHT ASIDE -->
     <div class="hidden 2xl:block border-l color-border">
         <div class="py-0 pt-0 sticky top-20">
@@ -274,16 +277,38 @@
                     class="overflow-y-scroll grow"
                     style="overscroll-behavior: contain"
                 >
-                    <!-- <div class="pb-2 px-4">
-                                <div
-                                    class="uppercase tracking-wider text-center pt-4 pb-2 sticky top-0 border-b color-border color-text-primary color-layer-0 font-semibold"
-                                >
-                                    contents
-                                </div>
-                                <div
-                                    class="toc flex flex-col gap-4 w-full capitalize tracking-wide py-2 px-4"
-                                ></div>
-                            </div> -->
+                    <% if (page.column && page.column.allPosts.length > 1 ) { %>
+                    <div class="pb-2 px-4">
+                        <div
+                            class="uppercase tracking-wider text-center pt-4 pb-2 sticky top-0 border-b color-border color-text-primary color-layer-0 font-semibold"
+                        >
+                            <a
+                                class="color-text-btn"
+                                href="<%= url_for(page.column.path) %>"
+                            >
+                                <%= page.column.title %>
+                            </a>
+                            专栏
+                        </div>
+                        <div
+                            class="toc flex flex-col gap-4 w-full capitalize tracking-wide py-2 px-4"
+                        >
+                            <% page.column.allPosts.forEach(function (p) { %>
+                            <% if ( p.title === page.title ) { %>
+                            <span
+                                class="text-textPrimary-light dark:text-textPrimary-dark font-semibold"
+                            >
+                                <%= p.title %>
+                            </span>
+                            <% } else { %>
+                            <a href="<%= url_for(p.path) %>" class="toc-item">
+                                <%= p.title %>
+                            </a>
+                            <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <% } %>
                 </div>
             </aside>
         </div>
