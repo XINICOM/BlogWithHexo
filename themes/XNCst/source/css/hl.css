@@ -1,0 +1,104 @@
+/*!
+  Theme: Dark+ (针对 .highlight 包裹结构)
+  Description: 基于 VS Code Dark+ 配色，适配后代选择器
+  Author: Custom for Highlight.js
+*/
+
+/* 根容器 - 使用后代选择器 */
+.highlight {
+    display: block;
+    /* overflow-x: auto;
+    padding: 0.5em; */
+    background: #1e1e1e;
+    color: #d4d4d4;
+}
+
+/* 基础文本 - 所有 span 的默认颜色 */
+.highlight span,
+.highlight .subst {
+    color: #d4d4d4;
+}
+
+/* 注释 */
+.highlight .comment {
+    color: #6a9955; /* VS Code 注释绿色 */
+    font-style: italic;
+}
+
+/* 关键字 */
+.highlight .keyword,
+.highlight .selector-tag,
+.highlight .doctag,
+.highlight .deletion {
+    color: #569cd6; /* VS Code 关键字蓝色 */
+}
+
+/* 字符串 */
+.highlight .string,
+.highlight .attribute,
+.highlight .addition {
+    color: #ce9178; /* VS Code 字符串橙色 */
+}
+
+/* 数字 */
+.highlight .number,
+.highlight .literal {
+    color: #b5cea8; /* VS Code 数字浅绿 */
+}
+
+/* 函数名、方法名 */
+.highlight .title,
+.highlight .section,
+.highlight .name {
+    color: #dcdcaa; /* VS Code 函数名黄色 */
+}
+
+/* 类名、类型名 */
+.highlight .type,
+.highlight .class .title {
+    color: #4ec9b0; /* VS Code 类型/类青色 */
+}
+
+/* 内置函数、常量 */
+.highlight .built_in,
+.highlight .builtin-name {
+    color: #4ec9b0; /* VS Code 内置函数青色 */
+}
+
+/* 变量 */
+.highlight .variable,
+.highlight .template-variable {
+    color: #9cdcfe; /* VS Code 变量亮蓝 */
+}
+
+/* 标签（HTML/XML） */
+.highlight .tag {
+    color: #569cd6; /* VS Code 标签蓝 */
+}
+
+/* 标签属性 */
+.highlight .attr {
+    color: #9cdcfe; /* VS Code 属性亮蓝 */
+}
+
+/* 正则表达式 */
+.highlight .regexp {
+    color: #d16969; /* VS Code 正则红 */
+}
+
+/* 符号、操作符、标点 */
+.highlight .symbol,
+.highlight .punctuation,
+.highlight .operator {
+    color: #d4d4d4; /* VS Code 默认前景色 */
+}
+
+/* 强调（斜体） */
+.highlight .emphasis {
+    font-style: italic;
+}
+
+/* 加粗 */
+.highlight .strong {
+    font-weight: bold;
+}

@@ -211,7 +211,7 @@ public class DataBaseManager
 }
 ```
 
-```txt main.py |highlight-lines:1,2,9
+```py main.py | highlight-lines:1,2,9
 import sys
 from flask import Flask, jsonify
 @app.route('/train_stream/<arg>', methods=['GET', 'POST'])
