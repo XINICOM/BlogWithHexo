@@ -1289,6 +1289,24 @@ article .callout .callout-title {
     opacity: 0.08; */
 }
 
+article .callout p:not(:first-of-type):not(:last-of-type) {
+  /* @apply pb-2 lg:pb-4; */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+article .callout p:last-of-type {
+  /* @apply pb-2 lg:pb-4; */
+  padding-top: 0.5rem;
+  padding-bottom: 0px;
+}
+
+article .callout p:first-of-type {
+  /* @apply pb-2 lg:pb-4; */
+  padding-top: 0px;
+  padding-bottom: 0.5rem;
+}
+
 .callout {
   --tw-text-opacity: 1;
   color: rgb(18 18 18 / var(--tw-text-opacity));
@@ -1316,26 +1334,6 @@ article .callout .callout-title {
 :is(:where(.dark) .callout) {
   --tw-bg-opacity: 1;
   background-color: rgb(56 56 56 / var(--tw-bg-opacity));
-}
-
-.callout a {
-  --tw-text-opacity: 1;
-  color: rgb(102 102 102 / var(--tw-text-opacity));
-}
-
-.callout a:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-:is(:where(.dark) .callout a) {
-  --tw-text-opacity: 1;
-  color: rgb(171 171 171 / var(--tw-text-opacity));
-}
-
-:is(:where(.dark) .callout a:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(243 243 243 / var(--tw-text-opacity));
 }
 
 .callout .callout-title {
@@ -1675,10 +1673,29 @@ article .callout .callout-title {
 
 /* COMMON TAG */
 
-p {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+a {
+  --tw-text-opacity: 1;
+  color: rgb(102 102 102 / var(--tw-text-opacity));
 }
+
+a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) a) {
+  --tw-text-opacity: 1;
+  color: rgb(171 171 171 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) a:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(243 243 243 / var(--tw-text-opacity));
+}
+
+/* p {
+    @apply py-1;
+} */
 
 article h1 {
   text-align: center;
@@ -1780,13 +1797,8 @@ article h6 {
 }
 
 article p {
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-@media (min-width: 1024px) {
-  article p {
-    padding-bottom: 1rem;
-  }
 }
 
 article :not(pre) > code {
