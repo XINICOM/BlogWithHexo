@@ -55,6 +55,9 @@ article .callout .callout-title {
     @apply border-textContent-light dark:border-textContent-dark;
     @apply bg-black/5 dark:bg-bg1-dark;
 }
+.callout a {
+    @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
+}
 .callout .callout-title {
     @apply border-textContent-light dark:border-textContent-dark;
 }
@@ -156,7 +159,7 @@ article .callout .callout-title {
 }
 .article-header .article-tag-item {
     /* @apply bg-black; */
-    @apply bg-black/5 dark:bg-code;
+    @apply bg-black/5 dark:bg-code-highlight;
     /* @apply text-textContent-light dark:text-textContent-dark; */
     @apply border border-border-light dark:border-border-dark rounded-md;
     @apply px-1;
@@ -235,7 +238,7 @@ article .callout .callout-title {
     @apply border-b border-border-light dark:border-border-dark;
 }
 .archive-cards .archive-tags-item {
-    @apply bg-black/5 dark:bg-code;
+    @apply bg-black/5 dark:bg-code-highlight;
     /* @apply text-textContent-light dark:text-textContent-dark; */
     @apply border border-border-light dark:border-border-dark rounded-md;
     @apply px-1;
@@ -272,7 +275,7 @@ article p {
     @apply pb-2 lg:pb-4;
 }
 article :not(pre) > code {
-    @apply bg-black/5 dark:bg-code;
+    @apply bg-black/5 dark:bg-code-highlight;
     @apply text-textContent-light dark:text-textContent-dark;
     @apply border border-border-light dark:border-border-dark rounded-md lg:rounded-xl;
     @apply px-1 mx-1;
@@ -298,16 +301,18 @@ hr {
 
 /* PRE TO CODE BLOCK */
 .code-section {
-    @apply border-2 border-border-light dark:border-border-dark;
+    /* @apply border-2 border-border-light dark:border-border-dark; */
+    @apply border-2 border-border-dark;
     @apply rounded-md lg:rounded-xl;
-    @apply bg-bg0-light dark:bg-code text-textContent-light dark:text-textContent-dark;
+    /* @apply bg-bg0-light dark:bg-code text-textContent-light dark:text-textContent-dark; */
+    @apply bg-code-default text-textContent-dark;
     @apply mt-2 mb-4;
-    /* @apply text-sm; */
 }
 .code-header {
     @apply flex flex-row justify-between;
     @apply h-fit px-2 py-1;
-    @apply border-b-2 border-border-light dark:border-border-dark;
+    /* @apply border-b-2 border-border-light dark:border-border-dark; */
+    @apply border-b-2 border-border-dark;
 }
 .code-header-left,
 .code-header-right {
@@ -320,7 +325,8 @@ hr {
     @apply select-none;
 }
 .code-header-copy-btn {
-    @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
+    /* @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark; */
+    @apply text-textSecondary-dark hover:text-textPrimary-dark;
 }
 .code-frame {
     @apply max-h-96 h-fit max-w-5xl mx-auto;
@@ -335,14 +341,16 @@ hr {
 }
 .code-numbders {
     @apply select-none text-right;
-    @apply border-r border-textSecondary-light text-textSecondary-light dark:border-textSecondary-dark dark:text-textSecondary-dark;
+    /* @apply border-r border-textSecondary-light text-textSecondary-light dark:border-textSecondary-dark dark:text-textSecondary-dark; */
+    @apply border-r border-textSecondary-dark text-textSecondary-dark;
     @apply flex flex-col items-stretch;
 }
 .code-numbers-num {
     @apply px-2;
 }
 .code-numbers-num.code-line-highlight {
-    @apply w-full bg-black/5 dark:bg-bg1-dark text-textPrimary-light dark:text-textPrimary-dark font-semibold;
+    /* @apply w-full bg-black/5 dark:bg-bg1-dark text-textPrimary-light dark:text-textPrimary-dark font-semibold; */
+    @apply w-full bg-code-highlight text-textPrimary-dark font-semibold;
 }
 .code-content {
     @apply overflow-x-auto overflow-y-hidden;
@@ -358,7 +366,8 @@ hr {
     @apply pl-2;
 }
 .code-content-line.code-line-highlight {
-    @apply bg-black/5 dark:bg-bg1-dark text-textPrimary-light dark:text-textPrimary-dark font-semibold;
+    /* @apply bg-black/5 dark:bg-bg1-dark text-textPrimary-light dark:text-textPrimary-dark font-semibold; */
+    @apply bg-code-highlight text-textPrimary-dark font-semibold;
 }
 
 /* IMG IN DARKMODE */

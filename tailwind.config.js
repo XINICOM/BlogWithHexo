@@ -1,3 +1,5 @@
+const { highlight } = require("hexo/dist/hexo/default_config");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -29,7 +31,11 @@ module.exports = {
                 ],
             },
             colors: {
-                code: "#2C2C2C",
+                // code: "#2C2C2C",
+                code: {
+                    default: "#1E1E1E",
+                    highlight: "#2C2C2C",
+                },
                 border: {
                     light: "#E0E0E0",
                     dark: "#404040",
