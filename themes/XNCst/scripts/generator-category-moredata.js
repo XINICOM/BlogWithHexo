@@ -1,3 +1,5 @@
+const { log } = require("hexo/dist/plugins/helper/debug");
+
 let categoryTopNodes = null;
 
 hexo.extend.filter.register("template_locals", function (locals) {
@@ -66,7 +68,10 @@ function categoriesToNode(sc) {
             if (topNodes.length > 0)
                 topNodes.forEach((n) => {
                     const result = n.getNodeWithId(c.parent);
-                    if (result) result.addChild(thisNode);
+                    if (result) {
+                        result.addChild(thisNode);
+                        thisNode.setParent(result);
+                    }
                 });
         }
     });
@@ -93,13 +98,29 @@ class CategoryNode {
         this.parent = o;
         return this;
     }
+    getParents() {
+        if (this.parent) {
+            const parentResults = this.parent.getParents() || [];
+            return [this.parent, ...parentResults];
+        }
+        return null;
+    }
     getNodeWithId(id) {
         if (this._id === id) return this;
         if (this.children && this.children.length > 0)
-            this.children.forEach((child) => {
+            for (const child of this.children) {
                 const result = child.getNodeWithId(id);
                 if (result) return result;
-            });
+            }
+        return null;
+    }
+    getNodeWithName(name) {
+        if (this.name === name) return this;
+        if (this.children && this.children.length > 0)
+            for (const child of this.children) {
+                const result = child.getNodeWithName(name);
+                if (result) return result;
+            }
         return null;
     }
     toJSON() {
