@@ -5,10 +5,9 @@ let categoryTopNodes = null;
 const rootPath = "categories/index.html";
 
 hexo.extend.filter.register("template_locals", function (locals) {
-    // const categoryTopNodes = categoriesToNode(locals.categories);
     if (!categoryTopNodes)
         categoryTopNodes = categoriesToNode(locals.categories);
-    // console.log(JSON.stringify(categoryTopNodes));
+
     if (locals.page && locals.page.category) {
         locals.page.allCategories = categoryTopNodes;
         locals.page.rootPath = rootPath;
@@ -18,12 +17,10 @@ hexo.extend.filter.register("template_locals", function (locals) {
 
 hexo.extend.generator.register("category-index", function (locals) {
     const posts = locals.posts.toArray();
-    //
-    // const categoryTopNodes = categoriesToNode(locals.categories);
+
     if (!categoryTopNodes)
         categoryTopNodes = categoriesToNode(locals.categories);
-    // console.log(JSON.stringify(categoryTopNodes));
-    //
+
     const result = {
         path: rootPath,
         data: {
@@ -33,9 +30,8 @@ hexo.extend.generator.register("category-index", function (locals) {
     };
     return result;
 });
-// sc: site.categories
+
 function categoriesToNode(sc) {
-    //
     const originData = sc?.data.slice() || null;
     if (!originData) return null;
 
