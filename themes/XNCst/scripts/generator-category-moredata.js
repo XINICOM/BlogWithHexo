@@ -1,5 +1,5 @@
-const { root } = require("hexo/dist/hexo/default_config");
-const { log } = require("hexo/dist/plugins/helper/debug");
+const fs = require("fs");
+const path = require("node:path");
 
 let categoryTopNodes = null;
 const rootPath = "categories/index.html";
@@ -50,6 +50,7 @@ function categoriesToNode(sc) {
                 c.permalink,
                 c.posts,
                 c.length,
+                getCatIntro(tryGetCatSlug(c.name) + ".md"),
             );
             topNodes.push(node);
         }
@@ -66,6 +67,7 @@ function categoriesToNode(sc) {
                 c.permalink,
                 c.posts,
                 c.length,
+                getCatIntro(tryGetCatSlug(c.name) + ".md"),
             );
             if (topNodes.length > 0)
                 topNodes.forEach((n) => {
@@ -82,7 +84,7 @@ function categoriesToNode(sc) {
 }
 
 class CategoryNode {
-    constructor(name, _id, slug, path, permalink, posts, length) {
+    constructor(name, _id, slug, path, permalink, posts, length, intro = null) {
         this.name = name;
         this._id = _id;
         this.slug = slug;
@@ -90,6 +92,7 @@ class CategoryNode {
         this.permalink = permalink;
         this.posts = posts;
         this.length = length;
+        this.intro = intro;
         this.children = [];
     }
     addChild(o) {
@@ -132,4 +135,54 @@ class CategoryNode {
             children: this.children,
         };
     }
+}
+
+function tryGetCatSlug(originCatName) {
+    if (hexo.config?.category_map)
+        return hexo.config?.category_map[originCatName] || originCatName;
+    else return originCatName;
+}
+
+function getCatIntro(fileName) {
+    const introDir = path.join(
+        hexo.source_dir,
+        hexo.config?.introduction_folder?.category || "_category-intros",
+    );
+    const filePath = path.join(introDir, fileName);
+    try {
+        if (fs.existsSync(filePath)) {
+            const content = fs.readFileSync(filePath, "utf8");
+            const contentWithoutFrontmatter = content.replace(
+                /^---\n[\s\S]*?\n---\n/,
+                "",
+            );
+            const renderedContent = hexo.render.renderSync({
+                text: contentWithoutFrontmatter,
+                engine: "markdown",
+            });
+            return renderedContent;
+        } else logWarning(`NO CATEGORY Introduction File named of ${fileName}`);
+    } catch (err) {
+        logError(`NO CATEGORY Introduction File named of ${fileName}`);
+    }
+    return null;
+}
+const colors = {
+    white: "\x1b[37m",
+    black: "\x1b[30m",
+    yellow: "\x1b[33m",
+    bgRed: "\x1b[41m",
+    bgYellow: "\x1b[43m",
+    bold: "\x1b[1m",
+    reset: "\x1b[0m",
+};
+function logError(message) {
+    console.log(
+        `${colors.bgRed}${colors.white} ERROR ${colors.reset} ${colors.white}${message}${colors.reset}`,
+    );
+}
+function logWarning(message) {
+    console.log(
+        `${colors.bgYellow}${colors.black} WARNING ${colors.reset} ${colors.yellow}${message}${colors.reset}`,
+    );
 }

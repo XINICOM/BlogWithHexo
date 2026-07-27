@@ -35,12 +35,17 @@
             <div class="text-2xl lg:text-4xl font-semibold pb-2">
                 <%= page.category %>（分类）
             </div>
-            <!-- <div class="text-lg lg:text-xl">
+            <div class="text-lg lg:text-xl">
+                <% if (currentNode?.intro) { %>
+                <p><%- currentNode?.intro %></p>
+                <% } else { %>
+                <p>本分类暂无介绍……</p>
+                <% } %>
+                <% if (!posts) { %>
                 <p>暂没有直接隶属于本分类的文章。</p>
-                <p>
-                    这是分类的根目录，您可以访问以下子链接以查看子分类和文章。
-                </p>
-            </div> -->
+                <% } %>
+            </div>
+
             <% if (page.rootPath) { %>
             <div class="flex flex-col gap-4 py-2 text-lg lg:text-xl">
                 <a class="color-text-btn" href="<%= url_for(page.rootPath) %>">

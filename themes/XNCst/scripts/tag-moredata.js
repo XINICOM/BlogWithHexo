@@ -21,7 +21,9 @@ hexo.extend.filter.register("template_locals", function (locals) {
 });
 
 function tryGetTagSlug(originTagName) {
-    return hexo.config.tag_map[originTagName] || originTagName;
+    if (hexo.config.tag_map)
+        return hexo.config?.tag_map[originTagName] || originTagName;
+    else return originTagName;
 }
 
 function getTagIntro(fileName) {
