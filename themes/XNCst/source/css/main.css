@@ -1864,15 +1864,15 @@ article :not(pre) > code {
   word-break: break-all;
 }
 
-article hr {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+hr {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(224 224 224 / var(--tw-border-opacity));
 }
 
-:is(:where(.dark) article hr) {
+:is(:where(.dark) hr) {
   --tw-border-opacity: 1;
   border-color: rgb(64 64 64 / var(--tw-border-opacity));
 }

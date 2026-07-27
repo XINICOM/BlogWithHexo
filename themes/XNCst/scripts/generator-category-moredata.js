@@ -1,6 +1,8 @@
+const { root } = require("hexo/dist/hexo/default_config");
 const { log } = require("hexo/dist/plugins/helper/debug");
 
 let categoryTopNodes = null;
+const rootPath = "categories/index.html";
 
 hexo.extend.filter.register("template_locals", function (locals) {
     // const categoryTopNodes = categoriesToNode(locals.categories);
@@ -9,13 +11,13 @@ hexo.extend.filter.register("template_locals", function (locals) {
     // console.log(JSON.stringify(categoryTopNodes));
     if (locals.page && locals.page.category) {
         locals.page.allCategories = categoryTopNodes;
+        locals.page.rootPath = rootPath;
     }
     return locals;
 });
 
 hexo.extend.generator.register("category-index", function (locals) {
     const posts = locals.posts.toArray();
-    const path = "categories/index.html";
     //
     // const categoryTopNodes = categoriesToNode(locals.categories);
     if (!categoryTopNodes)
@@ -23,7 +25,7 @@ hexo.extend.generator.register("category-index", function (locals) {
     // console.log(JSON.stringify(categoryTopNodes));
     //
     const result = {
-        path: path,
+        path: rootPath,
         data: {
             categoryTopNodes: categoryTopNodes,
         },

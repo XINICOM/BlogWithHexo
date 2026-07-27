@@ -1,16 +1,16 @@
 <% 
-var posts = page.posts.sort('updated', -1); 
-var yearGroups = {};
-posts.each(function(post) {
-    var year = (post.updated||post.date).year();
-    if (!yearGroups[year]) {
-        yearGroups[year] = [];
-    }
-    yearGroups[year].push(post);
-});
-var years = Object.keys(yearGroups).sort(function(a, b) {
-    return b - a;
-});
+    var posts = page.posts.sort('updated', -1); 
+    var yearGroups = {};
+    posts.each(function(post) {
+        var year = (post.updated||post.date).year();
+        if (!yearGroups[year]) {
+            yearGroups[year] = [];
+        }
+        yearGroups[year].push(post);
+    });
+    var years = Object.keys(yearGroups).sort(function(a, b) {
+        return b - a;
+    });
 %>
 <div class="content-body">
     <!-- CONTENT -->

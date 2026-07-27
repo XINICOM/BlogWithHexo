@@ -321,8 +321,8 @@ article :not(pre) > code {
     @apply px-1 mx-1;
     word-break: break-all;
 }
-article hr {
-    @apply my-2;
+hr {
+    @apply my-1;
     @apply border border-border-light dark:border-border-dark;
 }
 
