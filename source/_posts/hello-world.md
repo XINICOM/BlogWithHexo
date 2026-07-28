@@ -1,11 +1,11 @@
 ---
-title: Hello World
+title: 默认文章 Hello World
 date: 2025-07-24 17:31:38
 tags:
     - Welcome
     - Hexo
 column:
-    title: "Welcome to Hexo"
+    title: "Welcome to My Blog"
 ---
 
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).

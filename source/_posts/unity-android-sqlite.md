@@ -221,7 +221,7 @@ if __name__ == '__main__':
     app.run(host='127.0.0.1', port=int(port))
 ```
 
-```bash |highlight-lines:3
+```shell |highlight-lines:3
 hexo clean
 hexo g
 hexo s

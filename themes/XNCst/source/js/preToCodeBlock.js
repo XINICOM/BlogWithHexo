@@ -64,7 +64,13 @@ document.querySelectorAll("pre").forEach((pre) => {
     lines.forEach((line, index) => {
         const span = document.createElement("div");
         span.classList.add("code-content-line");
+        // line += " ";
         span.innerHTML = line || " ";
+        // console.log(line);
+        span.innerHTML =
+            line !== '<span class="line"></span>'
+                ? line
+                : '<span class="line"> </span>';
         const num = document.createElement("div");
         num.classList.add("code-numbers-num");
         num.textContent = index + 1;
