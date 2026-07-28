@@ -257,7 +257,7 @@ article .callout p:first-of-type {
 } */
 
 /* COMMON TAG */
-a {
+article a {
     @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
 }
 /* p {

@@ -1673,22 +1673,22 @@ article .callout p:first-of-type {
 
 /* COMMON TAG */
 
-a {
+article a {
   --tw-text-opacity: 1;
   color: rgb(102 102 102 / var(--tw-text-opacity));
 }
 
-a:hover {
+article a:hover {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-:is(:where(.dark) a) {
+:is(:where(.dark) article a) {
   --tw-text-opacity: 1;
   color: rgb(171 171 171 / var(--tw-text-opacity));
 }
 
-:is(:where(.dark) a:hover) {
+:is(:where(.dark) article a:hover) {
   --tw-text-opacity: 1;
   color: rgb(243 243 243 / var(--tw-text-opacity));
 }

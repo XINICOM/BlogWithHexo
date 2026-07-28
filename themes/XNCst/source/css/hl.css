@@ -5,13 +5,11 @@
 */
 
 /* 根容器 - 使用后代选择器 */
-.highlight {
+/* .highlight {
     display: block;
-    /* overflow-x: auto;
-    padding: 0.5em; */
     background: #1e1e1e;
     color: #d4d4d4;
-}
+} */
 
 /* 基础文本 - 所有 span 的默认颜色 */
 .highlight span,
@@ -20,15 +18,15 @@
 }
 
 /* 注释 */
+.highlight .doctag,
 .highlight .comment {
     color: #6a9955; /* VS Code 注释绿色 */
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 /* 关键字 */
 .highlight .keyword,
 .highlight .selector-tag,
-.highlight .doctag,
 .highlight .deletion {
     color: #569cd6; /* VS Code 关键字蓝色 */
 }
