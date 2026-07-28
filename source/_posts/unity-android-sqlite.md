@@ -17,20 +17,8 @@ header_callout:
     - level: "note"
       title: "本文在此处不是首发"
       detailFilePath: "_header-callout/uaq.md"
-updated: 2026-07-27
+updated: 2026-07-28
 ---
-
-> [!note] 这里应该是标题
-> 这里应该是内容
-> 这里应该是内容
->
-> > [!note] 这里应该是标题
-> > 这里应该是内容
-> > 这里应该是内容
-> >
-> > 这里应该是内容
->
-> 这里应该是内容
 
 # 前言
 
@@ -56,9 +44,9 @@ updated: 2026-07-27
 ### sqlite3.dll
 
 这个文件要去[SQLite官网](https://www.sqlite.org/download.html)上下载，把以下显示的两个下载下来：
-<!-- ![sqlite3.dll 文件](/1/7c349eaa2717e362a7ae83fbdf0b10c1.png) -->
 
 {% asset_img p1.png "sqlite3.dll 文件" %}
+
 把下载下来的两个压缩包解压后，就可以看到sqlite3.dll了，把该文件复制到你的项目下`Assets/Plugins`文件夹下面（没有该文件夹就自己创建一个）
 
 ### libsqlite3.so
@@ -66,7 +54,6 @@ updated: 2026-07-27
 这个在这篇文章的资源绑定中寻找（应该会显示在文章顶部）
 把该文件复制到你的项目下`Assets/Plugins/Android`文件夹下面（没有该文件夹就自己创建一个）
 最后你的项目下面应该有这些：
-<!-- ![项目资源树](/1/77429f4dc76e82171c3b4736afe41ba2.png) -->
 
 {% asset_img p2.png '项目资源树' %}
 
