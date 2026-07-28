@@ -72,9 +72,100 @@ column:
     cls
     ```
 
+## 专栏
+
+1. 提供了专栏功能，可以在文章的 `YAML Front Matter` 输入以下内容，实现 专栏
+
+    ```yaml postName.md | lang:YAML
+    ---
+    column:
+        # 专栏名称
+        title: "Welcome to My Blog"
+        # 本文在该专栏的排序
+        # 若没有本属性，则会按照更新先后顺序排在有 order
+        order: 1
+    ---
+    ```
+
+2. 可以在 `_config.yml` 中配置专栏名称的 mapping
+    ```yaml _config.yml | lang:YAML
+    # Column
+    column_map:
+        "专栏本名": "column-name-slug"
+    ```
+3. 每个专栏可以在 `source/_column-intros` 文件夹 中创建对应的 markdown 文件 已实现对专栏的介绍。
+
 ## 分类
 
 1. 提供了分类树插件，将默认的分类转换成分类树，以在 `post.ejs` 内可以方便的寻找 父分类 和 子分类。
 2. 每个分类可以在 `source/_category-intros` 文件夹 中创建对应的 markdown 文件 已实现对分类的介绍。
 
 ## 标签
+
+1. 每个标签可以在 `source/_tag-intros` 文件夹 中创建对应的 markdown 文件 已实现对标签的介绍。
+
+## Callout
+
+### 文内 Callout
+
+使用 `cheerio` 解析，实现把 `blockquote` 转成 `div.callout`，后用 css 提供样式
+
+> [!note] Note 样式
+> 内容1
+>
+> 内容2
+> 内容3
+
+> [!tip] Tip 样式
+> 内容1
+>
+> 内容2
+> 内容3
+
+> [!important] Important 样式
+> 内容1
+>
+> 内容2
+> 内容3
+
+> [!warning] Warning 样式
+> 内容1
+>
+> 内容2
+> 内容3
+
+> [!caution] Caution 样式
+> 内容1
+>
+> 内容2
+> 内容3
+
+文内 Callout 是可以叠加的：
+
+> [!note] Note 样式
+> 内容1
+>
+> > [!note] Note 样式
+> > 内容1
+> >
+> > 内容2
+> > 内容3
+>
+> 内容2
+> 内容3
+
+### 顶部 Callout
+
+在文章的 `YAML Front Matter` 输入以下内容，实现 顶部 Callout 效果
+但是 顶部 Callout 不可以叠加
+
+```yaml postName.md | lang:YAML
+---
+header_callout:
+    # 这是等级选择，可选的和 文内 Callout 提供的 5 种选择一致
+    - level: "note"
+      title: "这是标题"
+      # 这是内容的文件路径
+      detailFilePath: "_header-callout/xxx.md"
+---
+```
