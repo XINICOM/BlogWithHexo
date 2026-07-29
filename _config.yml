@@ -127,8 +127,6 @@ theme: XNCst
 deploy:
     type: ""
 
-# obsidian_callout:
-#     enabled: true
-#     debug: true
-# markdown:
-#     breaks: true # 建议开启
+simple_callout:
+    enable: true
+    styleInjection: false
