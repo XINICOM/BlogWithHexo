@@ -129,4 +129,4 @@ markdown 文件中的语法：
 # 反馈和支持
 
 - 遇到问题？推荐提交 [GitHub Issue](https://github.com/XINICOM/hexo-generator-simple_callout/issues)。
-- 您可以通过 XINICOM.DEV@outlook.com 来[联系我](mailto:XINICOM.DEV@outlook.com)。
+- 您可以通过 XINICOM.DEV@outlook.com 来联系我。

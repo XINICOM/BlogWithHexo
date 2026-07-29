@@ -125,7 +125,9 @@ theme: XNCst
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-    type: ""
+    type: git
+    repo: https://github.com/XINICOM/XINICOM.github.io
+    branch: main
 
 simple_callout:
     enable: true

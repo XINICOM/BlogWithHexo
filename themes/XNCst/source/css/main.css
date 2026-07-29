@@ -745,6 +745,10 @@ ol {
   width: 100vw;
 }
 
+.min-w-0 {
+  min-width: 0px;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -856,6 +860,10 @@ ol {
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .rounded-full {
@@ -1644,6 +1652,11 @@ article a:hover {
   color: rgb(243 243 243 / var(--tw-text-opacity));
 }
 
+article a {
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
+}
+
 article h1 {
   text-align: center;
   font-size: 1.5rem;
@@ -1774,12 +1787,6 @@ article :not(pre) > code {
   border-color: rgb(224 224 224 / var(--tw-border-opacity));
 }
 
-@media (min-width: 1024px) {
-  article :not(pre) > code {
-    border-radius: 0.75rem;
-  }
-}
-
 :is(:where(.dark) article :not(pre) > code) {
   --tw-border-opacity: 1;
   border-color: rgb(64 64 64 / var(--tw-border-opacity));
@@ -1790,7 +1797,10 @@ article :not(pre) > code {
   margin-right: 0.25rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-  word-break: break-all;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 hr {

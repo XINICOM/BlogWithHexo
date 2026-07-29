@@ -224,6 +224,7 @@ article .callout p:first-of-type {
 }
 article a {
     @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
+    @apply underline underline-offset-2;
 }
 article h1 {
     @apply font-extrabold  text-2xl lg:text-3xl text-center tracking-widest;
@@ -251,9 +252,12 @@ article p {
 article :not(pre) > code {
     @apply bg-black/5 dark:bg-code-highlight;
     @apply text-textContent-light dark:text-textContent-dark;
-    @apply border border-border-light dark:border-border-dark rounded-md lg:rounded-xl;
-    @apply px-1 mx-1;
-    word-break: break-all;
+    @apply border border-border-light dark:border-border-dark rounded-md;
+    @apply mx-1 px-1;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 hr {
     @apply my-1;

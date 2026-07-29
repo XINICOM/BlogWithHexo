@@ -22,6 +22,26 @@
             }
         },
         {
+            "label": "Hexo-Generate",
+            "type": "shell",
+            "command": "hexo g",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Hexo-Deploy",
+            "type": "shell",
+            "command": "hexo d",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
             "label": "Hexo-Clean",
             "type": "shell",
             "command": "hexo clean",
@@ -34,6 +54,13 @@
         {
             "label": "HEXO Test",
             "dependsOn": ["Hexo-Clean", "Hexo-Server"],
+            "dependsOrder": "sequence", // 或 "parallel"
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "HEXO DEPLOY",
+            "dependsOn": ["Hexo-Clean", "Hexo-Generate", "Hexo-Deploy"],
             "dependsOrder": "sequence", // 或 "parallel"
             "group": "build",
             "problemMatcher": []
