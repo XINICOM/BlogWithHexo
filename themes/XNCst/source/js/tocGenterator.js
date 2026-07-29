@@ -5,27 +5,18 @@ const CONFIG = {
     safety_scroll_offset: 1,
 };
 
-// let baseIndent = 10;
-// CONFIG.tags.forEach((x) => {
-//     console.log(x);
-//     const tagIndent = parseInt(x.substring(1), 10);
-//     if (tagIndent < baseIndent) baseIndent = tagIndent;
-// });
-
 const containers = document.querySelectorAll(`.${CONFIG.tocContainer_Class}`);
 const content = document.querySelector(`article[${CONFIG.content_Attribute}]`);
 if (containers.length > 0 && content) {
     //
     const allHeaders = content.querySelectorAll("h1, h2, h3, h4, h5, h6");
     let baseIndent = 6;
-    allHeaders.forEach((ah) => {
+    allHeaders.forEach(ah => {
         const ahi = parseInt(ah.tagName.substring(1), 10);
         if (ahi < baseIndent) baseIndent = ahi;
     });
     let targetTags = [`h${baseIndent}`];
-    for (let i = 1; i < CONFIG.levels; i++)
-        targetTags.push(`h${baseIndent + i}`);
-    console.log(targetTags);
+    for (let i = 1; i < CONFIG.levels; i++) targetTags.push(`h${baseIndent + i}`);
     const headers = content.querySelectorAll(targetTags.join(","));
     //
     // const headers = content.querySelectorAll(CONFIG.tags.join(","));
@@ -42,25 +33,21 @@ if (containers.length > 0 && content) {
                 if (!id) id = `section-${index}`;
                 h.id = id;
             }
-            // console.log(baseIndent);
             const indent = parseInt(h.tagName.substring(1), 10) - baseIndent;
             tocHTML += `<a href="#${id}" class="toc-item level-${indent}" style="padding-left: ${indent * 1.2}rem">${h.textContent.trim()}</a>`;
         });
 
-        containers.forEach((c) => {
+        containers.forEach(c => {
             c.innerHTML = tocHTML;
 
             const tocLinks = c.querySelectorAll(".toc-item");
-            tocLinks.forEach((a) => {
+            tocLinks.forEach(a => {
                 a.addEventListener("click", function (e) {
                     e.preventDefault();
                     const targetId = a.getAttribute("href").substring(1);
                     const targetElement = document.getElementById(targetId);
                     if (!targetElement) return;
-                    const targetPosition =
-                        targetElement.getBoundingClientRect().top +
-                        window.pageYOffset -
-                        (window.innerWidth > 1024 ? 80 : 64);
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - (window.innerWidth > 1024 ? 80 : 64);
 
                     window.scrollTo({
                         top: targetPosition,
@@ -96,14 +83,11 @@ if (containers.length > 0 && content) {
 }
 
 function updateActiveLink(headers, containers) {
-    containers.forEach((c) => {
+    containers.forEach(c => {
         const links = c.querySelectorAll(".toc-item");
 
         let currentIndex = -1;
-        const scrollY =
-            window.pageYOffset +
-            (window.innerWidth > 1024 ? 80 : 64) +
-            CONFIG.safety_scroll_offset;
+        const scrollY = window.pageYOffset + (window.innerWidth > 1024 ? 80 : 64) + CONFIG.safety_scroll_offset;
 
         if (!headers || links.length <= 0) return;
         for (let i = headers.length - 1; i >= 0; i--) {

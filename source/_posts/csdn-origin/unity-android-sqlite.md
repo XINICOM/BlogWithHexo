@@ -17,7 +17,7 @@ header_callout:
     - level: "note"
       title: "本文在此处不是首发"
       detailFilePath: "_header-callout/uaq.md"
-updated: 2026-07-28
+updated: 2026-07-29
 ---
 
 # 前言
@@ -61,7 +61,7 @@ updated: 2026-07-28
 
 新建 C# 脚本复制下面代码：
 
-```cs DataBase.cs | highlight-lines:1,2,3 | lang:txt
+```cs DataBase.cs | lang:C#
 public class DataBaseManager
 {
     /// <summary>
@@ -206,31 +206,9 @@ public class DataBaseManager
 }
 ```
 
-```py main.py | highlight-lines:1,2,9
-import sys
-from flask import Flask, jsonify
-@app.route('/train_stream/<arg>', methods=['GET', 'POST'])
-def train_stream(arg):
-    print(f"PY --> Invoked {train_stream.__name__}", flush=True)
-    print(f"PY GET PARAMS: {arg}", flush=True)
-    train_s()
-    return jsonify({"successful":"0"})
-if __name__ == '__main__':
-    port = sys.argv[1]
-    print(f"Running on port {port}", flush=True)
-    app.run(host='127.0.0.1', port=int(port))
-```
-
-```shell |highlight-lines:3
-hexo clean
-hexo g
-hexo s
-npm install
-```
-
 ## 创建Sqlite数据库文件
 
-这里我使用了[SQLiteStudio](https://sqlitestudio.pl/)，用它创建数据库，并把数据库文件放在你的项目下面的`Assets/StreamingAssets`文件夹下（没有该文件夹就自己创建一个）
+这里我使用了 [SQLiteStudio](https://sqlitestudio.pl/) ，用它创建数据库，并把数据库文件放在你的项目下面的`Assets/StreamingAssets`文件夹下（没有该文件夹就自己创建一个）
 
 # 使用案例
 

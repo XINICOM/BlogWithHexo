@@ -4,10 +4,9 @@ const CopyIcon =
 const CopiedIcon =
     '<svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.0498 3.92579L8.49512 12.3818C8.25774 12.6881 8.04517 12.9645 7.84668 13.1689C7.63957 13.3823 7.38732 13.5841 7.04492 13.6719C6.86373 13.7183 6.6757 13.7346 6.48926 13.7197C6.13666 13.6915 5.8528 13.5355 5.6123 13.3604C5.38201 13.1926 5.12573 12.9567 4.83984 12.6953L1.03125 9.21289L1.96875 8.1875L5.77734 11.6699C6.08684 11.9529 6.27773 12.1249 6.43066 12.2363C6.50183 12.2882 6.54699 12.3135 6.57324 12.3252C6.58525 12.3305 6.59269 12.3322 6.5957 12.333C6.59802 12.3336 6.59961 12.334 6.59961 12.334C6.63317 12.3367 6.66758 12.3335 6.7002 12.3252C6.7002 12.3252 6.70211 12.3251 6.7041 12.3242C6.70698 12.3229 6.71348 12.319 6.72461 12.3115C6.74849 12.2956 6.78843 12.2642 6.84961 12.2012C6.98138 12.0654 7.13957 11.8628 7.39648 11.5313L13.9502 3.07422L15.0498 3.92579Z" fill="currentColor"></path></svg>';
 
-const CopyErrorIcon =
-    '<svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+const CopyErrorIcon = '<svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
-document.querySelectorAll("pre").forEach((pre) => {
+document.querySelectorAll("pre").forEach(pre => {
     const caption = pre.querySelector("div.caption");
     if (caption) {
         if (caption.textContent.includes("|")) {
@@ -16,13 +15,9 @@ document.querySelectorAll("pre").forEach((pre) => {
             for (let i = 1; i < args.length; i++) {
                 const arg = args[i].trim();
                 if (!arg) break;
-                console.log(arg);
                 if (arg.includes(":")) {
                     const attributePair = arg.split(":");
-                    pre.setAttribute(
-                        attributePair[0].trim(),
-                        attributePair[1].trim(),
-                    );
+                    pre.setAttribute(attributePair[0].trim(), attributePair[1].trim());
                 } else if (arg.startsWith(".")) {
                     pre.classList.add(arg.slice(1).trim());
                 }
@@ -64,13 +59,8 @@ document.querySelectorAll("pre").forEach((pre) => {
     lines.forEach((line, index) => {
         const span = document.createElement("div");
         span.classList.add("code-content-line");
-        // line += " ";
         span.innerHTML = line || " ";
-        // console.log(line);
-        span.innerHTML =
-            line !== '<span class="line"></span>'
-                ? line
-                : '<span class="line"> </span>';
+        span.innerHTML = line !== '<span class="line"></span>' ? line : '<span class="line"> </span>';
         const num = document.createElement("div");
         num.classList.add("code-numbers-num");
         num.textContent = index + 1;
@@ -117,10 +107,8 @@ document.querySelectorAll("pre").forEach((pre) => {
     const l2 = pre.getAttribute("language");
     if (l2) language = l2 !== "txt" ? l2 : "Plain Text";
     else if (l1) language = l1 !== "txt" ? l1 : "Plain Text";
-    else if (caption && caption.textContent.includes("."))
-        language = caption.textContent.split(".")[1].trim().toUpperCase();
-    else if (code.classList[0] === "highlight" && code.classList[1])
-        language = code.classList[1].toUpperCase();
+    else if (caption && caption.textContent.includes(".")) language = caption.textContent.split(".")[1].trim().toUpperCase();
+    else if (code.classList[0] === "highlight" && code.classList[1]) language = code.classList[1].toUpperCase();
     else language = "Plain Text";
     codeHR_Language.textContent = language;
     // codeHR_Language.classList.add("capitalize");

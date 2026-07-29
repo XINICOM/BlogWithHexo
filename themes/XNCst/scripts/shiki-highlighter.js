@@ -64,7 +64,6 @@ async function getHighlighter() {
     return highlighter;
 }
 
-// 注册 Hexo 过滤器
 hexo.extend.filter.register("after_post_render", async function (data) {
     if (!data.content) return data;
 
@@ -102,39 +101,13 @@ hexo.extend.filter.register("after_post_render", async function (data) {
                     theme: config.theme,
                 });
 
-                // 如果启用行号，给高亮结果添加额外配置
-                // if (config.line_number) {
-                //     // Shiki 默认支持行号，需要额外配置
-                //     // 这里是一个简化的行号实现方式
-                //     const lines = code.split("\n").length;
-                //     let lineNumbersHtml = '<div class="line-numbers">';
-                //     for (let i = 1; i <= lines; i++) {
-                //         lineNumbersHtml += `<span class="line-number">${i}</span>`;
-                //     }
-                //     lineNumbersHtml += "</div>";
-
-                //     // 将行号包裹在 pre 内部
-                //     const $highlighted = cheerio.load(highlighted);
-                //     const $pre = $highlighted("pre");
-                //     $pre.prepend(lineNumbersHtml);
-                //     $pre.addClass("line-numbers-enabled");
-                //     highlighted = $highlighted.html();
-                // }
-
-                // 替换原有的 <pre> 标签
                 const $after = cheerio.load(highlighted);
                 $code.parent("pre").addClass($after("pre").attr("class"));
                 $code.replaceWith("<code>" + $after("code").html() + "</code>");
-                // $code.parent("pre").replaceWith(highlighted);
-                // console.log("================================");
-                // console.log(highlighted);
-                // console.warn(highlighted);
+
                 highlightCount++;
             } catch (error) {
-                console.warn(
-                    `⚠️ Shiki 高亮失败 (语言: ${lang}):`,
-                    error.message,
-                );
+                console.warn(`⚠️ Shiki 高亮失败 (语言: ${lang}):`, error.message);
                 // 如果高亮失败，保留原始代码块，避免文章破损
             }
         });
