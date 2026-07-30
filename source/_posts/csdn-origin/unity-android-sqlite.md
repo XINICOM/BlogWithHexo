@@ -10,6 +10,7 @@ tags:
 categories:
     - 编程
     - 游戏开发
+    - Unity
 column:
     title: "Unity 开发经验"
     order: 1
@@ -17,12 +18,12 @@ header_callout:
     - level: "note"
       title: "本文在此处不是首发"
       detailFilePath: "_header-callout/uaq.md"
-updated: 2026-07-29
+updated: 2026-07-30
 ---
 
 # 前言
 
-相信大家在进行Unity开发中使用`Sqlite`等数据库已经十分复杂了，而如果想要其打包出的平台上也可以使用就更麻烦了。下面为大家介绍一种，我实测有效的方法。  
+相信大家在进行Unity开发中使用 `Sqlite` 等数据库已经十分复杂了，而如果想要其打包出的平台上也可以使用就更麻烦了。下面为大家介绍一种，我实测有效的方法。  
 本人是新手，如有纰漏，敬请谅解并请在评论区指出。谢谢~
 
 # 实践步骤
