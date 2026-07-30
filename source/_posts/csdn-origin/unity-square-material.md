@@ -40,13 +40,13 @@ header_callout:
             //获得信息
             Mesh mesh = new Mesh();
             Vector3 Scale = transform.localScale;
-            #if UNITY_EDITOR
+    #if UNITY_EDITOR
                 MeshFilter mf = GetComponent<MeshFilter>();
                 Mesh meshCopy = Mesh.Instantiate(mf.sharedMesh) as Mesh;
                 mesh = meshCopy;
-            #else
+    #else
                 mesh = GetComponent<MeshFilter>().mesh;
-            #endif
+    #endif
 
             //UV变量
             Vector2[] uvs = new Vector2[mesh.uv.Length];
@@ -120,17 +120,17 @@ header_callout:
 
 4. 将图片导入，设置参考如下：
 
-    {% asset_img p-reference-setting.png '图片参考设置' %}
+    ![图片参考设置](unity-square-material/p-reference-setting.png)
 
 5. 制作材质球，设置参考如下：
 
-    {% asset_img m-reference-setting.png '材质球参考设置' %}
+    ![材质球参考设置](unity-square-material/m-reference-setting.png)
 
 6. 将材质球和 MeshUv.cs 拖拽赋予给一个 Cube，随意缩放点击 APPLY 按钮，即可自动贴图：
 
-    {% asset_img auto1.png '自动贴图效果 1' %}
+    ![自动贴图效果 1](unity-square-material/auto1.png)
 
-    {% asset_img auto2.png '自动贴图效果 2' %}
+    ![自动贴图效果 2](unity-square-material/auto2.png)
 
 # 原理
 
@@ -144,7 +144,7 @@ header_callout:
 
 理解了上文之后，我们一个物体要有棱角，必须告诉计算机每一个面的方向。
 
-{% asset_img n-vec.png '法线方向图解' %}
+![法线方向图解](unity-square-material/n-vec.png)
 
 Unity 里面的法向遵守“左手定律”，即四指弯曲方向为数字增加方向，大拇指方向为法向方向。
 
@@ -154,7 +154,7 @@ Unity 里面的法向遵守“左手定律”，即四指弯曲方向为数字�
 
 接下来就要看以下 Unity 内部的 Cube Mesh 是如何分配这 24 个 UV 点的。
 
-{% asset_img uv-dot.png 'UV 点图解' %}
+![UV 点图解](unity-square-material/uv-dot.png)
 
 上图用 1 ~ 24 标注了 6 个面的 UV 点  
 下表写了每个 UV 点初始的数值
@@ -190,7 +190,7 @@ Unity 里面的法向遵守“左手定律”，即四指弯曲方向为数字�
 
 ## 更改数值
 
-```cs | lang:C#
+```cs | lang:C# | highlight-lines:3,7,9
 Mesh mesh = new Mesh();
 Vector3 Scale = transform.localScale;
 #if UNITY_EDITOR

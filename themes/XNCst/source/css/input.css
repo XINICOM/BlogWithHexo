@@ -222,9 +222,11 @@ article .callout p:first-of-type {
         list-style-type: decimal;
     }
 }
+.callout a,
 article a {
     @apply text-textSecondary-light hover:text-textPrimary-light dark:text-textSecondary-dark dark:hover:text-textPrimary-dark;
-    @apply underline underline-offset-2;
+    @apply underline;
+    text-underline-offset: 3px;
 }
 article h1 {
     @apply font-extrabold  text-2xl lg:text-3xl text-center tracking-widest;
@@ -262,6 +264,11 @@ article :not(pre) > code {
 hr {
     @apply my-1;
     @apply border border-border-light dark:border-border-dark;
+}
+.callout hr,
+article hr {
+    @apply my-8 -mx-2;
+    @apply border border-textContent-light dark:border-textContent-dark;
 }
 
 /* TOC BTN */

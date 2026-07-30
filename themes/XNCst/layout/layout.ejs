@@ -4,14 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <%- css('css/main.css') %>
-        <%- css('css/hl.css') %>
         <script defer src="<%- url_for('/js/themeBtn.js') %>"></script>
         <script defer src="<%- url_for('/js/navMenuBtn.js') %>"></script>
         <script defer src="<%- url_for('/js/imgWrapper.js') %>"></script>
-        <script
-            defer
-            src="<%- url_for('/js/asideHeightControl.js') %>"
-        ></script>
+        <script defer src="<%- url_for('/js/asideHeightControl.js') %>"></script>
         <title><%= config.title %></title>
     </head>
     <body class="antialiased color-layer-0 color-text-primary overflow-auto">
@@ -20,5 +16,7 @@
         <%- body %>
         <!--  -->
         <%- partial('partials/_footer.ejs', { cache: true }) %>
+        <!--  -->
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     </body>
 </html>

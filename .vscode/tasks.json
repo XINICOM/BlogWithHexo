@@ -5,7 +5,7 @@
             "label": "Listen HTML/CSS Change",
             "type": "shell",
             "command": "npx tailwindcss -i ./themes/XNCst/source/css/input.css -o ./themes/XNCst/source/css/main.css --watch",
-            "group": "build",
+            "group": "test",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -15,7 +15,7 @@
             "label": "Hexo-Server",
             "type": "shell",
             "command": "hexo s",
-            "group": "build",
+            "group": "none",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -25,7 +25,7 @@
             "label": "Hexo-Generate",
             "type": "shell",
             "command": "hexo g",
-            "group": "build",
+            "group": "none",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -35,7 +35,7 @@
             "label": "Hexo-Deploy",
             "type": "shell",
             "command": "hexo d",
-            "group": "build",
+            "group": "none",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -45,17 +45,17 @@
             "label": "Hexo-Clean",
             "type": "shell",
             "command": "hexo clean",
-            "group": "build",
+            "group": "none",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
             }
         },
         {
-            "label": "HEXO Test",
+            "label": "HEXO Server Test",
             "dependsOn": ["Hexo-Clean", "Hexo-Server"],
             "dependsOrder": "sequence", // 或 "parallel"
-            "group": "build",
+            "group": "test",
             "problemMatcher": []
         },
         {
@@ -64,6 +64,50 @@
             "dependsOrder": "sequence", // 或 "parallel"
             "group": "build",
             "problemMatcher": []
+        },
+        {
+            "label": "HEXO NEW POST",
+            "type": "shell",
+            "command": "hexo",
+            "args": ["new", "${input:new_article_name}", "--slug", "${input:new_article_slug}", "${input:clean_key_hexo_nan}"],
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "clean_key_hexo_nan",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": {
+                "store": {
+                    "key_hexo_nan": {
+                        "text": "",
+                        "action": "forget"
+                    }
+                }
+            }
+        },
+        {
+            "id": "new_article_name",
+            "type": "command",
+            "command": "extension.commandvariable.promptStringRemember",
+            "args": {
+                "key": "key_hexo_nan",
+                "description": "Enter the post NAME"
+            }
+        },
+        {
+            "id": "new_article_slug",
+            "type": "command",
+            "command": "extension.commandvariable.promptStringRemember",
+            "args": {
+                "key": "key_hexo_nan",
+                "description": "Enter the post SLUG (NAME is the default option)"
+            }
         }
     ]
 }

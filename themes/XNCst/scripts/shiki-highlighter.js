@@ -55,9 +55,11 @@ async function getHighlighter() {
                 themes: [config.theme],
                 langs: config.langs,
             });
-            console.log(`✅ Shiki 高亮器初始化成功 (主题: ${config.theme})`);
+            // console.log(`✅ Shiki 高亮器初始化成功 (主题: ${config.theme})`);
+            hexo.log.info(`Shiki init success with theme: ${config.theme}`);
         } catch (error) {
-            console.error("❌ Shiki 高亮器初始化失败:", error);
+            // console.error("❌ Shiki 高亮器初始化失败:", error);
+            hexo.log.error("Shiki init error", error);
             throw error;
         }
     }
@@ -107,19 +109,22 @@ hexo.extend.filter.register("after_post_render", async function (data) {
 
                 highlightCount++;
             } catch (error) {
-                console.warn(`⚠️ Shiki 高亮失败 (语言: ${lang}):`, error.message);
+                // console.warn(`⚠️ Shiki 高亮失败 (语言: ${lang}):`, error.message);
+                hexo.log.warn(`Shiki CANNOT highlight language: ${lang}`, error.message);
                 // 如果高亮失败，保留原始代码块，避免文章破损
             }
         });
 
         if (highlightCount > 0) {
-            console.log(`🔹 Shiki 高亮了 ${highlightCount} 个代码块`);
+            // console.log(`🔹 Shiki 高亮了 ${highlightCount} 个代码块`);
+            hexo.log.info(`Shiki highlighted ${highlightCount} pre(s)`);
         }
 
         data.content = $.html();
         return data;
     } catch (error) {
-        console.error("❌ Shiki 处理失败:", error);
+        // console.error("❌ Shiki 处理失败:", error);
+        hexo.log.error("Shiki process error", error);
         // 出错时返回原始内容，不影响文章生成
         return data;
     }
@@ -130,4 +135,4 @@ hexo.extend.helper.register("shiki_theme", function () {
     return config.theme;
 });
 
-console.log("🔹 Shiki 高亮插件已加载");
+// console.log("🔹 Shiki 高亮插件已加载");

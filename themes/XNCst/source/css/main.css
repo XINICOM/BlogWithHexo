@@ -1632,29 +1632,34 @@ article .callout p:first-of-type {
 
 /* COMMON TAG */
 
+.callout a,
 article a {
   --tw-text-opacity: 1;
   color: rgb(102 102 102 / var(--tw-text-opacity));
 }
 
+.callout a:hover,
 article a:hover {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-:is(:where(.dark) article a) {
+:is(:where(.dark) .callout a),:is(:where(.dark) 
+article a) {
   --tw-text-opacity: 1;
   color: rgb(171 171 171 / var(--tw-text-opacity));
 }
 
-:is(:where(.dark) article a:hover) {
+:is(:where(.dark) .callout a:hover),:is(:where(.dark) 
+article a:hover) {
   --tw-text-opacity: 1;
   color: rgb(243 243 243 / var(--tw-text-opacity));
 }
 
+.callout a,
 article a {
   text-decoration-line: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 article h1 {
@@ -1814,6 +1819,23 @@ hr {
 :is(:where(.dark) hr) {
   --tw-border-opacity: 1;
   border-color: rgb(64 64 64 / var(--tw-border-opacity));
+}
+
+.callout hr,
+article hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(18 18 18 / var(--tw-border-opacity));
+}
+
+:is(:where(.dark) .callout hr),:is(:where(.dark) 
+article hr) {
+  --tw-border-opacity: 1;
+  border-color: rgb(212 212 212 / var(--tw-border-opacity));
 }
 
 /* TOC BTN */
