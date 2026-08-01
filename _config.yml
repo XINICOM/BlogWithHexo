@@ -85,6 +85,7 @@ default_category: uncategorized
 category_map:
     "编程": "coding"
     "游戏开发": "game-dev"
+    "工具": "tools"
 tag_map:
     "数据库": "data-base"
 

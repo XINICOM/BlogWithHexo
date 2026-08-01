@@ -1,1 +1,4 @@
 hexo-generator-simple-callout.md
+
+# Don't format templates in scaffolds
+scaffolds/

@@ -9,6 +9,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
             }
         },
         {
@@ -19,6 +26,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
             }
         },
         {
@@ -29,6 +43,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
             }
         },
         {
@@ -39,6 +60,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": true
             }
         },
         {
@@ -49,6 +77,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
             }
         },
         {
@@ -56,14 +91,28 @@
             "dependsOn": ["Hexo-Clean", "Hexo-Server"],
             "dependsOrder": "sequence", // 或 "parallel"
             "group": "test",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
+            }
         },
         {
             "label": "HEXO DEPLOY",
             "dependsOn": ["Hexo-Clean", "Hexo-Generate", "Hexo-Deploy"],
             "dependsOrder": "sequence", // 或 "parallel"
             "group": "build",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
+            }
         },
         {
             "label": "HEXO NEW POST",
@@ -74,6 +123,13 @@
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
             }
         }
     ],
