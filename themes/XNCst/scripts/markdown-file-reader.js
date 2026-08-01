@@ -2,26 +2,22 @@ const fs = require("fs");
 const path = require("path");
 
 function mdFileToHTML(hexo, dir, fileFullName) {
-    // const dir = path.join(
-    //     hexo.source_dir,
-    //     hexo.config?.introduction_folder?.tag || "_tag-intros",
-    // );
     const filePath = path.join(dir, fileFullName);
     try {
         if (fs.existsSync(filePath)) {
             const content = fs.readFileSync(filePath, "utf8");
-            const contentWithoutFrontmatter = content.replace(
-                /^---\n[\s\S]*?\n---\n/,
-                "",
-            );
+            const contentWithoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n/, "");
             const renderedContent = hexo.render.renderSync({
                 text: contentWithoutFrontmatter,
                 engine: "markdown",
             });
             return renderedContent;
-        } else logWarning(`NO Introduction File named of ${fileFullName}`);
+        } else
+            // logWarning(`NO Introduction File named of ${fileFullName}`);
+            hexo.log.warn(`NO Introduction File named of ${fileFullName}`);
     } catch (err) {
-        logError(err);
+        // logError(err);
+        hexo.log.error(`Something error when getting content of ${fileFullName}`, err);
     }
     return null;
 }
@@ -36,19 +32,11 @@ const colors = {
     reset: "\x1b[0m",
 };
 function logError(message) {
-    console.log(
-        `${colors.bgRed}${colors.white} ERROR ${colors.reset} ${colors.white}${message}${colors.reset}`,
-    );
+    console.log(`${colors.bgRed}${colors.white} ERROR ${colors.reset} ${colors.white}${message}${colors.reset}`);
 }
 function logWarning(message) {
-    console.log(
-        `${colors.bgYellow}${colors.black} WARNING ${colors.reset} ${colors.yellow}${message}${colors.reset}`,
-    );
+    console.log(`${colors.bgYellow}${colors.black} WARNING ${colors.reset} ${colors.yellow}${message}${colors.reset}`);
 }
-
-// exports.mdFileContentToHTML = mdFileContentToHTML;
-// exports.logError = logError;
-// exports.logWarning = logWarning;
 
 module.exports = {
     mdFileToHTML: mdFileToHTML,
