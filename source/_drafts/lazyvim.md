@@ -12,3 +12,4 @@ https://zhuanlan.zhihu.com/p/600565445
 
 关键在于要对 opts.sources.default 设置为 function
 若是将 opts.sources设置为 function 则会报错（原因应该是其有大量的值，设置为 function 就损失了）
+https://www.lazyvim.org/extras/coding/blink
