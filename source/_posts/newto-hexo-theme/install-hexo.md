@@ -9,13 +9,13 @@ categories:
 column:
     title: 从零开始使用 Hexo 和自制主题
     order: 1
-date: 2026-08-05 16:10:14
-updated: 2026-08-05 16:10:14
+date: 2026-08-05
+updated: 2026-08-06
 ---
 
-# 简介
+本人使用 Hexo 和为 Hexo 开发插件和主题纯属好奇，本人无系统的 JavaScript 基础，故而可能错漏
 
-本章节先进行 Windows 下 Hexo 的下载和简单的 Hexo 介绍
+本章节先进行 Windows 下 Hexo 的下载，和简单的 Hexo 介绍
 
 # 安装
 
@@ -102,8 +102,37 @@ updated: 2026-08-05 16:10:14
 
     ![Hexo 默认网页图](./install-hexo/h-d.png)
 
-## 直接使用 XNCst 主题
+# 直接使用 XNCst 主题
 
 你也可以选择使用我的博客的主题 XNCst
 
-直接克隆
+在完成上述安装步骤的 1 ~ 3 后，直接克隆本博客对应的仓库 [BlogWithHexo](https://github.com/XINICOM/BlogWithHexo.git) 到本地，然后删除 `source\_posts\` 下的所有内容，即可开始
+
+# Hexo 简介
+
+## _config.yml
+
+Hexo 中最重要的配置文件
+大部分的配置均以 yaml 格式存在这里，这里也是在写作时更改配置的常用文件
+
+## themes\
+
+该文件夹存放主题文件
+
+> [!note] themes\ 文件夹为空
+> 在高版本的 Hexo 中 landscape 这个默认主题已经被打包成了一个插件，即在 package-lock,json 中可见的 hexo-theme-landscape 插件
+
+## scaffolds\
+
+该文件夹存放模板文件
+通过使用 `hexo new postName` 命令，则会按照该文件夹中的 post.md 文件的模板来初始化你的新文章
+
+## source\_posts\
+
+这个文件夹里面的每一个 md 文件都会变成生成的网页中的 post
+
+## .github\
+
+这个文件夹下的更新依赖机器人会每天检查是否要更新 npm 包
+
+这个我用不到就删了
