@@ -33,11 +33,11 @@ html {
 article .callout {
     @apply px-4 py-2 lg:py-4;
     @apply my-2 lg:my-4;
-    @apply tracking-wide text-base lg:text-lg;
+    @apply tracking-wide text-base;
     @apply border-l-4;
 }
 article .callout .callout-title {
-    @apply text-lg lg:text-2xl tracking-wider font-semibold pb-2 lg:pb-4;
+    @apply text-xl tracking-wider font-semibold pb-2 lg:pb-4;
 }
 article .callout p:not(:first-of-type):not(:last-of-type) {
     @apply py-2;

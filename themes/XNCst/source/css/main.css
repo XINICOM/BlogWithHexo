@@ -1264,22 +1264,12 @@ article .callout {
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0.025em;
-}
-
-@media (min-width: 1024px) {
-  article .callout {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-}
-
-article .callout {
   border-left-width: 4px;
 }
 
 article .callout .callout-title {
   padding-bottom: 0.5rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -1288,8 +1278,6 @@ article .callout .callout-title {
 @media (min-width: 1024px) {
   article .callout .callout-title {
     padding-bottom: 1rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 }
 

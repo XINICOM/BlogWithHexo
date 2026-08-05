@@ -92,6 +92,7 @@ tag_map:
 # Column
 column_map:
     "Unity 开发经验": "Unity-dev-experience"
+    "从零开始使用 Hexo 和自制主题": "newto-hexo-theme"
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
