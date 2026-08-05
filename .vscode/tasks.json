@@ -29,7 +29,7 @@
             },
             "presentation": {
                 "reveal": "always",
-                "panel": "new",
+                "panel": "shared",
                 "showReuseMessage": false,
                 "clear": true,
                 "close": true
