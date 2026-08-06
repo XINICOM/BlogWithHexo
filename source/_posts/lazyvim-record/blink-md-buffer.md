@@ -5,6 +5,7 @@ tags:
     - NeoVim
     - LazyVim
     - Windows
+    - markdown
 categories:
     - 编程
     - 工具
