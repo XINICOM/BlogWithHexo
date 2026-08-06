@@ -63,34 +63,34 @@ local ch_im = "2052"
 vim.api.nvim_create_augroup("AutoSwitchIM", { clear = true })
 
 vim.api.nvim_create_autocmd("InsertEnter", {
-	group = "AutoSwitchIM",
-	pattern = "*",
-	callback = function()
-		vim.fn.jobstart({ imselect, ch_im })
-	end,
+    group = "AutoSwitchIM",
+    pattern = "*",
+    callback = function()
+        vim.fn.jobstart({ imselect, ch_im })
+    end,
 })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
-	group = "AutoSwitchIM",
-	pattern = "*",
-	callback = function()
-		vim.fn.jobstart({ imselect, eng_im })
-	end,
+    group = "AutoSwitchIM",
+    pattern = "*",
+    callback = function()
+        vim.fn.jobstart({ imselect, eng_im })
+    end,
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-	group = "AutoSwitchIM",
-	pattern = "*",
-	callback = function()
-		vim.fn.jobstart({ imselect, eng_im })
-	end,
+    group = "AutoSwitchIM",
+    pattern = "*",
+    callback = function()
+        vim.fn.jobstart({ imselect, eng_im })
+    end,
 })
 
 vim.api.nvim_create_autocmd("VimLeave", {
-	group = "AutoSwitchIM",
-	pattern = "*",
-	callback = function()
-		vim.fn.jobstart({ imselect, ch_im })
-	end,
+    group = "AutoSwitchIM",
+    pattern = "*",
+    callback = function()
+        vim.fn.jobstart({ imselect, ch_im })
+    end,
 })
 ```

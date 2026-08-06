@@ -3,8 +3,16 @@
     "useTabs": false,
     "plugins": ["prettier-plugin-ejs"],
     "semi": true,
-    "trailingComma": "es5",
     "printWidth": 150,
     "bracketSpacing": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "trailingComma": "es5",
+    "overrides": [
+        {
+            "files": ["tsconfig.json", "*.jsonc"],
+            "options": {
+                "trailingComma": "none"
+            }
+        }
+    ]
 }

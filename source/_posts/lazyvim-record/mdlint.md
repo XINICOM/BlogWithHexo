@@ -11,7 +11,7 @@ categories:
     - 工具
 column:
     title: LazyVim 使用记录
-updated: 2026-08-06 18:19:15
+updated: 2026-08-06 21:16:50
 ---
 
 # 简介
@@ -23,23 +23,13 @@ updated: 2026-08-06 18:19:15
 
 # 步骤
 
-在 `$env:LOCALAPPDATA\nvim\lua\plugins\lint.lua` 中添加：
+在你项目的根目录处添加 `.markdwonlint-cli2.jsonc` 文件：
 
-```lua lint.lua | lang:lua
-return {
-	{
-		"mfussenegger/nvim-lint",
-		opts = {
-			linters = {
-				["markdownlint-cli2"] = {
-					args = { "--disable", "MD025", "--" },
-				},
-			},
-		},
-	},
+```json .markdwonlint-cli2.jsonc | lang:jsonc
+{
+    "config": {
+        "default": true,
+        "MD025": false
+    }
 }
 ```
-
-> [!WRNING] 可能错误
-> 由于在使用这个方法后似乎所有的错误检查都消失了，
-> 该方法可能是错误的，可能会导致插件无法正确加载
