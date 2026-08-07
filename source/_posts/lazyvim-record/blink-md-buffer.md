@@ -11,7 +11,7 @@ categories:
     - 工具
 column:
     title: LazyVim 使用记录
-updated: 2026-08-06
+updated: 2026-08-07
 ---
 
 # 简介
@@ -24,17 +24,16 @@ updated: 2026-08-06
 
 ```lua blink.lua | lang:lua
 return {
-	{
-		"saghen/blink.cmp",
-		opts = function(_, opts)
-			opts.sources.default = function()
-				if vim.bo.filetype == "markdown" then
-					return { "lsp", "path", "snippets" }
-				else
-					return { "lsp", "path", "snippets", "buffer" }
-				end
-			end
-		end,
-	},
+    {
+        "saghen/blink.cmp",
+        opts = {
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+                per_filetype = {
+                    markdown = { "lsp", "path", "snippets" },
+                },
+            },
+        },
+    },
 }
 ```
