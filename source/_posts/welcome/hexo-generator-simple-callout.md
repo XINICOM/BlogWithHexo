@@ -8,6 +8,7 @@ tags:
 column:
     title: "Welcome to My Blog"
     order: 2
+updated: 2026-08-06 22:44
 ---
 # 介绍
 
@@ -43,6 +44,11 @@ markdown 文件中的语法：
 
 ```md
 > [!note] 这是标题
+> 这是内容
+
+<!-- 你也可以使用任意大写字母 -->
+
+> [!NoTe] 这是标题
 > 这是内容
 ```
 
